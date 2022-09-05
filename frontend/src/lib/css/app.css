@@ -1,0 +1,211 @@
+@import "@fortawesome/fontawesome-free/css/solid";
+@import "@fortawesome/fontawesome-free/css/fontawesome";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.card-subtitle{
+    @apply text-base font-semibold
+}
+
+.evaluation-good{
+    @apply bg-green-600 text-white border-none
+}
+
+.evaluation-ok{
+    @apply bg-yellow-500 text-white border-none
+}
+
+
+.evaluation-mixed{
+    @apply from-yellow-500 text-white border-none to-green-600 bg-gradient-to-r
+}
+
+.evaluation-mixed:hover{
+    @apply bg-blend-darken !important
+}
+
+
+
+.badge-primary{
+   @apply bg-gray-100
+}
+
+
+.evaluation-bad{
+    @apply bg-red-600 text-white border-none
+}
+
+
+.btn-chosen{
+    @apply btn-primary text-white
+}
+
+.disabled{
+    @apply text-base-200
+}
+
+.is-editable{
+    content: '\f044';
+    @apply mr-2 fas
+}
+
+.editable:hover:before{
+    @apply is-editable
+}
+
+.editable:focus{
+    @apply is-editable
+}
+
+.note-link:before{
+    content: '\f360';
+    @apply mr-1 fas
+}
+
+.action-button{
+    @apply btn btn-sm btn-ghost
+}
+
+.category{
+    @apply badge badge-secondary
+}
+
+.other-category{
+    @apply badge badge-secondary badge-outline text-secondary
+
+}
+
+.research-quality-good{
+    @apply badge badge-success text-white
+
+}
+
+.research-quality-okay{
+    @apply badge  badge-warning text-white
+
+}
+
+.other-research-quality-good{
+    @apply badge  badge-outline border-success text-success
+
+}
+
+.other-research-quality-okay{
+    @apply badge badge-outline border-warning text-warning
+
+}
+.category::before{
+    @apply mr-1
+}
+.source{
+    @apply badge badge-accent
+}
+
+
+.other-source{
+    @apply badge badge-accent badge-outline text-accent
+
+}
+
+.source::before{
+    content: 'Quelle:';
+    @apply mr-1
+}
+
+._mined_item{
+    @apply badge badge-outline badge-neutral text-secondary
+}
+
+.full_mined_item{
+    @apply badge !important
+}
+
+
+.keyword{
+    @apply _mined_item
+}
+
+.keyword::before{
+    content: '\f292';
+    @apply mr-1;
+    @apply fas
+}
+
+.named-entity{
+    @apply _mined_item
+}
+
+
+.badge-neutral{
+    @apply  badge-outline
+}
+
+.named-entity::before{
+    content: '\f02b';
+    @apply fas mr-1;
+}
+
+.service-named-entity-recognition{
+    @apply named-entity;
+}
+
+.service-keyword-extraction{
+    @apply keyword;
+}
+
+.simple-list{
+    @apply list-disc  ml-8
+}
+
+.custom-dropzone{
+    @apply border-primary
+}
+
+
+.subtitle{
+    @apply font-medium leading-tight text-lg mt-1 mb-2
+}
+
+.auth-background{
+    @apply  from-primary via-primary to-secondary bg-gradient-to-b
+}
+
+
+.result_keyword{
+   @apply keyword
+}
+
+.result_named_entity{
+    @apply named-entity
+}
+
+.LOCATION::before{
+    content: '\f3c5';
+
+}
+
+.ORGANIZATION::before{
+    content: '\f0c0';
+
+}
+
+.PERSON::before{
+    content: '\f007';
+}
+
+
+.sidebar{
+    @apply w-80
+}
+
+.w-98{
+    width: 30rem
+}
+
+
+.w-100{
+    width: 38rem
+}
