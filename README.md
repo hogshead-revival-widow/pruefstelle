@@ -1,4 +1,4 @@
-Prototypisches Tool zum Qualitätsmanagement automatischer Erschließung (Textmining) im Archiv, das auf Basis menschlicher Bewertungen unter Verwendung eines festzulegenden Fallprofils einen Prozentwert ("Recherchegüte") berechnet.  
+Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining) im Archiv, das auf Basis menschlicher Bewertungen unter Verwendung eines festzulegenden Fallprofils einen Prozentwert ("Recherchegüte") berechnet.  
 
 **Achtung**: Prüfstelle ist eine Alpha-Version.
 
