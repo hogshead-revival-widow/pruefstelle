@@ -19,7 +19,7 @@ from .report import router as report_router
 from .tasks import router as task_router
 
 
-# from .admin import router as admin_router
+from .admin import router as admin_router
 from .security import router as security_router
 
 # Change the order here to change the order displayed in docs
@@ -45,7 +45,6 @@ main_router.include_router(task_router, prefix="/task", tags=["Task"])
 
 
 main_router.include_router(security_router, prefix="/auth", tags=["Authenticate"])
-
-# main_router.include_router(
-#    admin_router, prefix="/admin", tags=["Administration"], dependencies=[AdminUser]
-# )
+main_router.include_router(
+    admin_router, prefix="/admin", tags=["Administration"], dependencies=[AdminUser]
+)

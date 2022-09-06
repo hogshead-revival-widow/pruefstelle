@@ -58,13 +58,48 @@ Je nach Verwendungszweck empfiehlt sich in `.secrets.toml` unter `[production.db
 
 # Nutzung
 
-## Kategorien anlegen
+# Nutzer:innen-Verwaltung
+
+Rollen: 
+
+* User:in: Kann auf alle Endpunkte außer die unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
+* Superuser:in: Kann zusätzlich auf die Endpunkte unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
+
+## Nutzer:in als Superuser:in anlegen
+
+Das ist nur über die Kommandozeile möglich, siehe dazu `pruefstelle create-user --help`.
+
+## Normale Nutzer:innen anlegen
+
+Normale Nutzer:innenaccounts lassen sich über den [`create_user`-Endpunkt](http://localhost:8000/docs#/Administration/create_user) anlegen.
+
+## Kategorien
+
+### Standardkategorien automatisch hinzufügen
 
 Ist die [Datei `settings/fixed_categories.json` vorhanden](#weitere-einschränkungen), kann `pruefstelle populate` ausgeführt werden, um Kategorien anzulegen.
 
-## Nutzer:innen anlegen
+### Kategorien ändern/anlegen
 
-Nutzer:innen können mit `pruefstelle create-user` angelegt werden (mehr dazu unter `pruefstelle create-user --help`)
+
+Kategorien lassen sich über die [`admin/category`-Endpunkte](http://localhost:8000/docs#/Administration) anlegen/ändern
+
+
+## Nutzer:innen-Verwaltung
+
+
+Rollen: 
+
+* User:in: Kann auf alle Endpunkte außer die unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
+* Superuser:in: Kann zusätzlich auf die Endpunkte unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
+
+## Nutzer:in als Superuser:in anlegen
+
+Das ist nur über die Kommandozeile möglich, siehe dazu `pruefstelle create-user --help`.
+
+## Normale Nutzer:innen anlegen/ändern
+
+Normale Nutzer:innen lassen sich über die [`admin/user`-Endpunkte](http://localhost:8000/docs#/Administration) anlegen/ändern.
 
 ## Was ist unter welcher URL?
 
@@ -72,7 +107,7 @@ Wurde nichts geändert, ist *pruefstelle* nun unter http://localhost:3000 zu err
 
 ## API-Client für Frontend automatisch generieren
  
-Werden Anpassungen am Backend vorgenommen, muss ggf. der Frontend-Client aktualisiert werden. 
+Werden Anpassungen am Backend vorgenommen, muss ggf. der Frontend-Client aktualisiert werden. Es ist sinnvoll, die für das Frontend irrelevanten Adminrouten vorab auszukommentieren (unter `backend/pruefstelle/routes/__init__.py`).
 
 Dazu ist unter http://localhost:8000/openapi.json die automatisch erzeugte API-Spezifikation verfügbar. Mit dieser kann per `npx swagger-typescript-api -p openapi.json -o ./src --unwrap-response-data --single-http-client --modular` ein Client erzeugt werden.
 
