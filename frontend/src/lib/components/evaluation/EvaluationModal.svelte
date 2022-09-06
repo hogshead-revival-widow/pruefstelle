@@ -325,10 +325,9 @@
 								</p>
 							{:else}
 								<p>
-									Wie gut beschreibt das Schlüsselwort
-									<mark class={toEvaluate.getClasses()}>
+									Wie gut beschreibt das Schlüsselwort <mark class={toEvaluate.getClasses()}>
 										{toEvaluate.name}
-									</mark><br />
+									</mark>
 									das Dokument <strong>{@html toEvaluate.getDocumentLink(false)}?</strong>
 								</p>
 							{/if}
