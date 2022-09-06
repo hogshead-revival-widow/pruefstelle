@@ -60,8 +60,8 @@ Je nach Verwendungszweck empfiehlt sich in `.secrets.toml` unter `[production.db
 
 # Rollen
 
-* **User:in**: Kann auf alle Endpunkte außer die unter [admin/] (http://localhost:8000/docs#/Administration) zugreifen
-* **Superuser:in**: Kann zusätzlich auf die Endpunkte unter [admin/] (http://localhost:8000/docs#/Administration) zugreifen
+* **User:in**: Kann auf alle Endpunkte außer die unter [admin/](http://localhost:8000/docs#/Administration) zugreifen
+* **Superuser:in**: Kann zusätzlich auf die Endpunkte unter [admin/](http://localhost:8000/docs#/Administration) zugreifen
 
 # Nutzer:innen-Verwaltung
 
