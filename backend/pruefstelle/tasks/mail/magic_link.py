@@ -11,6 +11,6 @@ def send_magic_link(to: EmailStr, token: str):
     content = f"""\
         <p>Klicke <a href="{link}">hier</a>, um dich anzumelden.</p>
         <br/>
-        <p>Oder kopiere alternativ diesen Link in deinen Browser: <p>http://{link}</p>
+        <p>Oder kopiere alternativ diesen Link in deinen Browser: <pre>{link}</pre></p>
         """
     send(to, subject=subject, content=content, as_html=True)
