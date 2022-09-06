@@ -5,6 +5,7 @@ node_modules
 /package
 .env
 fixed_categories.json
+fesad_rest.pem
 
 # Secrets
 .secrets.toml

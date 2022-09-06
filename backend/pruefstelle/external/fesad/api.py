@@ -23,7 +23,11 @@ class DocumentImporter(Api):
         url_scheme: Literal["http", "https"] = settings.TEXT_IMPORTER.URL_SCHEME,
     ):
         self.paths = paths
-        super().__init__(base_url=base_url, url_scheme=url_scheme)
+        super().__init__(
+            base_url=base_url,
+            url_scheme=url_scheme,
+            verify=settings.TEXT_IMPORTER.VERIFY,
+        )
 
     @Api.ErrorHandling.on_response_error
     def get_texts(self, identifier: PositiveInt) -> List[ImportableText]:
@@ -51,21 +55,17 @@ class DocumentImporter(Api):
         du_key: PositiveInt,
         name: Optional[str] = None,
         category_id: Optional[UUID] = None,
-    ) -> Optional[ImportableDocument]:
+    ) -> ImportableDocument:
         """Get texts, currently only importing from FESAD"""
         path = self.paths.from_du_key.format(du_key=du_key)
         url = self._path_to_url(path=path)
         response = self._get(url)
-        data = response.json()
+        data = response.json()["du"]
         texts = []
 
         try:
-            if "du" not in data:
-                return None
-            data = data["du"]
-
             if name is None:
-                name = settings.STRINGS.TEXT_IMPORT_DEFAULT_TITLE
+                name = "unbekannt"
 
                 titles = list()
                 # we are only interested in the first two title parts

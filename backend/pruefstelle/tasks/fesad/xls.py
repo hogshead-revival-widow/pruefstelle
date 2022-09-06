@@ -55,7 +55,7 @@ def read_collection(xls: UploadFile) -> List[DocumentInformation]:
                 titles.append(str(label))
             else:
                 # still no title? set default value
-                titles.append(settings.STRINGS.TEXT_IMPORT_DEFAULT_TITLE)
+                titles.append("unbekannt")
 
         title = ": ".join(titles)
         document_information = DocumentInformation(du_key=du_key, name=title)
