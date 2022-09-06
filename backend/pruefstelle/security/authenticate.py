@@ -53,7 +53,7 @@ def get_current_user(
     )
 
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])  # type: ignore
         email: EmailStr = payload.get("sub")  # type: ignore
         if email is None:
             raise credentials_exception
