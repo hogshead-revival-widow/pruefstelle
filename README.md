@@ -56,6 +56,40 @@ Statt `pruefstelle` (Schritt 8) `ENV_FOR_PRUEFSTELLE=production pruefstelle run`
 Je nach Verwendungszweck empfiehlt sich in `.secrets.toml` unter `[production.db]` eine andere Datenbank als SQLite (z. B. PostgreSQL) einzusetzen sowie uvicorn in Verbindung mit z. B. guvicorn zu nutzen; Informationen zu Letzterem finden sich [hier](https://fastapi.tiangolo.com/deployment/server-workers/).
 
 
+# Orientierung Verzeichnisstruktur & wichtige Dateien
+
+Zu den Konfigurationsdateien vgl. `examples/` und den Abshcnitt zur Installation oben.
+
+## Frontend
+
+* `/pruefstelle/frontend/src/routes`: Routing mit Pfaden, wie sie im Browser verwendet werden.
+* `/pruefstelle/frontend/src/api`: Der generierte und angepasste (zu Anpassungen vergleich in den Kommentaren im Kopf der Dateien) API-Client
+* `/pruefstelle/frontend/src/components`: Svelte-Bausteine; je in Unterordner organisiert, wenn Komponenten enger zusammenhängen
+* `/pruefstelle/frontend/src/scripts`: Skripte; wenn sie zu einer Komponente gehören, haben die Skripte die gleichen Namen wie die Bausteine in `components/`
+
+### Mehr Informationen
+
+[SvelteKit-Dokumentation](https://github.com/sveltejs/kit/tree/87552ef7efd2f6b38dd7e3f7a90bc9fd5ceb12f3/documentation/docs)
+
+
+## Backend
+
+* `pruefstelle/backend/pruefstelle/database`: Alles was mit der Datenbank zu tun hat; in `pruefstelle/backend/pruefstelle/database/tables.py` werden die Tabellen deklariert; in `crud/` finden sich die Datenbankoperationen
+* `pruefstelle/backend/pruefstelle/external`: API-Clients für externes Services, die zur Interaktion mit diesen von `base_api.py:Api` erben
+* `pruefstelle/backend/pruefstelle/routes`: Endpunkte Prüfstellen-API; in `restrictions/` finden sich ggf. vorhandene Bedingungen, die für die Durchführung einer Endpunkt-Aktion erfüllt sein müssen; vgl. dazu auch `routes/__init__.py`
+* `pruefstelle/backend/pruefstelle/schemas`: Serialisierungsschemata bzw. Modelle der Endpunkte
+* `pruefstelle/backend/pruefstelle/security`: JWT-Authentifzierung 
+* `pruefstelle/backend/pruefstelle/tasks`: Alle sonstigen Operationen, die nicht CRUD-Operationen sind (z. B. `report/` zur Generierung des Punktwerts auf Basis des Fallprofils)
+
+
+Dabei gilt, dass z. B. `routes/case.py` sich auf z.B. die Schemata in `schemas/case.py` bezieht. 
+
+### Mehr Informationen
+
+* Datenbank: [SQLAlchemy-Dokumentation](https://docs.sqlalchemy.org/en/14/orm/declarative_tables.html#explicit-schema-name-with-declarative-table)
+* API: [Fastapi-Dokumentation](https://fastapi.tiangolo.com/)
+
+
 # Nutzung
 
 ## Rollen
