@@ -61,6 +61,9 @@ class MiningApi(Api):
         url = self._path_to_url(path=path)
         response = self._get(url)
         data = response.json()
+        # if "keywords" in data:
+        #    for index, keyword in enumerate(keyword):
+        #        data["keywords"][index]["relevance"] = data["keywords"][index]["relevance"][:9]
         return OrderStatus(**data)
 
     @Api.ErrorHandling.on_response_error
@@ -102,4 +105,9 @@ class MiningApi(Api):
                     "text"
                 ]
                 data["named_entities"][index].pop("text")
+        if "keywords" in data:
+            for index, keyword in enumerate(data["keywords"]):
+                data["keywords"][index]["relevance"] = "{:.2f}".format(
+                    float(data["keywords"][index]["relevance"])
+                )
         return result(order_id=order_id, **data)
