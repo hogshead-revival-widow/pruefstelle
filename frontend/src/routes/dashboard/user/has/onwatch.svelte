@@ -27,6 +27,6 @@
 
 {#key currentPage}
 	<div in:fade class="mt-4">
-		<PagedCases title="Beobachte Fälle" {readPagedCases} {toPageCase} {filterCases} />
+		<PagedCases title="Merkliste" {readPagedCases} {toPageCase} {filterCases} />
 	</div>
 {/key}

@@ -7,14 +7,14 @@
 
 	const items = [
 		{
-			label: ' beobachtet',
-			icon: 'fa-star',
-			target: '/dashboard/user/has/onwatch'
-		},
-		{
 			label: 'bewertet',
 			icon: 'fa-gavel',
 			target: '/dashboard/user/has/evaluated'
+		},
+		{
+			label: 'Merkliste',
+			icon: 'fa-star',
+			target: '/dashboard/user/has/onwatch'
 		},
 		{
 			label: 'Mail ändern',

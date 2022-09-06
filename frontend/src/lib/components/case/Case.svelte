@@ -80,12 +80,12 @@
 							try {
 								readCase = await Pruefstelle.toggleWatchCase(readCase.id);
 							} catch (error) {
-								const message = 'Kann Fall nicht beobachten';
+								const message = 'Merken fehlgeschlagen';
 								const type = 'error';
 								addAlert({ message, type });
 							}
 						}}>
-						<i class="fas fa-star" class:disabled={!isWatchingCase} /> beobachten
+						<i class="fas fa-star" class:disabled={!isWatchingCase} /> merken
 					</button>
 				</li>
 
