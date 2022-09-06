@@ -23,7 +23,7 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 4. `npm i`
 5. `npm run dev`
 
-*Pruefstelle* ist zwar unter http://localhost:3000/ erreichbar, wird aber einen Fehler anzeigen. Schließlich läuft das Backend noch nicht.
+*Prüfstelle* ist zwar unter http://localhost:3000/ erreichbar, wird aber einen Fehler anzeigen. Schließlich läuft das Backend noch nicht.
 
 ## Backend
 
@@ -38,7 +38,7 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 
 Die API ist unter http://localhost:8000 (Swagger UI unter: http://localhost:8000/docs) erreichbar. 
 
-Und *pruefstelle* wartet nun ohne Fehler unter http://localhost:3000. 
+Und *prüfstelle* wartet nun ohne Fehler unter http://localhost:3000. 
 
 
 # Produktion
@@ -92,6 +92,8 @@ Dabei gilt, dass z. B. `routes/case.py` sich auf z.B. die Schemata in `schemas/c
 
 # Nutzung
 
+*Die Links in diesem Abschnitt verweisen direkt auf die API und sind nur zugänglich, wenn diese auf localhost:8000 läuft.* 
+
 ## Rollen
 
 * **User:in**: Kann auf alle Endpunkte außer die unter [admin/](http://localhost:8000/docs#/Administration) zugreifen
@@ -119,7 +121,7 @@ Kategorien lassen sich über die [`admin/category`-Endpunkte](http://localhost:8
 
 ## Was ist unter welcher URL?
 
-Wurde nichts geändert, ist *pruefstelle* nun unter http://localhost:3000 zu erreichen, die API unter http://localhost:8000 (API-Dokumentation unter: http://localhost:8000/docs).
+Wurde nichts geändert, ist *prüfstelle* nun unter http://localhost:3000 zu erreichen, die API unter http://localhost:8000 (API-Dokumentation unter: http://localhost:8000/docs).
 
 ## API-Client für Frontend automatisch generieren
  
@@ -135,7 +137,7 @@ Nun bitte die in den Dateien in  `frontend/lib/api` dokumentierten Änderungen v
 
 Vielmehr kann mit *prüfstelle* aus der Perspektive ausgewählter Beispielfälle **exploriert** werden, unter welchen Weiterverarbeitungsbedingungen was wie gut funktioniert. Der Blick geht dabei vom Besonderen auf das Allgemeine, was eine Verallgemeinerung nur unter bestimmten Bedingungen erlaubt. Statt also zu fragen "was kann die Maschine?" ist die Frageperspektive hier: "Wie gut funktioniert das für mein Archivgut?".
 
-Viele Hilfstexte helfen dabei, Berühungsängste mit automatischen Klassifizieren abzubauen und so mithilfe von *prüfstelle* Einsatzzwecke in einer kontrollierten Umgebung zu erproben.
+Viele Hilfstexte helfen dabei, sich automatischen Klassifizieren auch ohne Vorwissen zu nähern und so mithilfe von *prüfstelle* Einsatzzwecke in einer kontrollierten Umgebung zu erproben.
 
  
  ## Weitere Einschränkungen
