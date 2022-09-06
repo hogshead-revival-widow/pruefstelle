@@ -329,7 +329,7 @@
 									<mark class={toEvaluate.getClasses()}>
 										{toEvaluate.name}
 									</mark><br />
-									das Dokument {@html toEvaluate.getDocumentLink(false)}?
+									das Dokument <strong>{@html toEvaluate.getDocumentLink(false)}?</strong>
 								</p>
 							{/if}
 
