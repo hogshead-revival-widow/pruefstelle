@@ -18,15 +18,15 @@ class Paths(BaseModel):
 class DocumentImporter(Api):
     def __init__(
         self,
-        paths: Paths = settings.TEXT_IMPORTER.PATHS,
-        base_url: str = settings.TEXT_IMPORTER.BASE_URL,
-        url_scheme: Literal["http", "https"] = settings.TEXT_IMPORTER.URL_SCHEME,
+        paths: Paths = settings.TEXT_IMPORTER.PATHS,  # type: ignore
+        base_url: str = settings.TEXT_IMPORTER.BASE_URL,  # type: ignore
+        url_scheme: Literal["http", "https"] = settings.TEXT_IMPORTER.URL_SCHEME,  # type: ignore
     ):
         self.paths = paths
         super().__init__(
             base_url=base_url,
             url_scheme=url_scheme,
-            verify=settings.TEXT_IMPORTER.VERIFY,
+            verify=settings.get("text_importer.verify", None),  # type: ignore
         )
 
     @Api.ErrorHandling.on_response_error
