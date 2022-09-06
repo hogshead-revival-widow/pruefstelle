@@ -58,20 +58,20 @@ Je nach Verwendungszweck empfiehlt sich in `.secrets.toml` unter `[production.db
 
 # Nutzung
 
+# Rollen
+
+* **User:in**: Kann auf alle Endpunkte außer die unter [admin/] (http://localhost:8000/docs#/Administration) zugreifen
+* **Superuser:in**: Kann zusätzlich auf die Endpunkte unter [admin/] (http://localhost:8000/docs#/Administration) zugreifen
+
 # Nutzer:innen-Verwaltung
-
-Rollen: 
-
-* User:in: Kann auf alle Endpunkte außer die unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
-* Superuser:in: Kann zusätzlich auf die Endpunkte unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
 
 ## Nutzer:in als Superuser:in anlegen
 
 Das ist nur über die Kommandozeile möglich, siehe dazu `pruefstelle create-user --help`.
 
-## Normale Nutzer:innen anlegen
+## Normale Nutzer:innen anlegen/ändern
 
-Normale Nutzer:innenaccounts lassen sich über den [`create_user`-Endpunkt](http://localhost:8000/docs#/Administration/create_user) anlegen.
+Normale Nutzer:innenaccounts lassen sich über die [`admin/user`-Endpunkte](http://localhost:8000/docs#/Administration/create_user) anlegen/ändern.
 
 ## Kategorien
 
@@ -84,22 +84,6 @@ Ist die [Datei `settings/fixed_categories.json` vorhanden](#weitere-einschränku
 
 Kategorien lassen sich über die [`admin/category`-Endpunkte](http://localhost:8000/docs#/Administration) anlegen/ändern
 
-
-## Nutzer:innen-Verwaltung
-
-
-Rollen: 
-
-* User:in: Kann auf alle Endpunkte außer die unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
-* Superuser:in: Kann zusätzlich auf die Endpunkte unter [Administration] (http://localhost:8000/docs#/Administration) zugreifen
-
-## Nutzer:in als Superuser:in anlegen
-
-Das ist nur über die Kommandozeile möglich, siehe dazu `pruefstelle create-user --help`.
-
-## Normale Nutzer:innen anlegen/ändern
-
-Normale Nutzer:innen lassen sich über die [`admin/user`-Endpunkte](http://localhost:8000/docs#/Administration) anlegen/ändern.
 
 ## Was ist unter welcher URL?
 
