@@ -81,9 +81,7 @@ Ist die [Datei `settings/fixed_categories.json` vorhanden](#weitere-einschränku
 
 ### Kategorien ändern/anlegen
 
-
 Kategorien lassen sich über die [`admin/category`-Endpunkte](http://localhost:8000/docs#/Administration) anlegen/ändern
-
 
 ## Was ist unter welcher URL?
 
