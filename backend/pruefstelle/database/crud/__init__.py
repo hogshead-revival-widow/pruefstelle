@@ -66,6 +66,3 @@ from .user import (
 )
 
 from ..errors import IDError, NotUniqueError
-
-
-from .magic_link import get_link, delete_link, delete_old_links, create_link_value

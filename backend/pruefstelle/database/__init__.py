@@ -25,7 +25,6 @@ from .tables import (
     Item,
     TextCategory,
     ItemType,
-    MagicLink,
 )
 
 AnyResult = Union[Keyword, NamedEntity]

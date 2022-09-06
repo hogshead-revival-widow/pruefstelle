@@ -451,15 +451,3 @@ class ScoredEvaluation(Evaluation):
 @mapper_registry.mapped
 class CorrectnessEvaluation(Evaluation):
     __mapper_args__ = {"polymorphic_identity": EvaluationType.CorrectnessEvaluation}
-
-
-"""
-Magic Link
-"""
-
-
-@mapper_registry.mapped
-class MagicLink(WithTablename, WithDate):
-    user_id = Column(ForeignKey("user.id"), primary_key=True)
-    value = Column(String(255), nullable=False)
-    user = relationship("User")

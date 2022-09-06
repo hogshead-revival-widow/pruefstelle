@@ -965,36 +965,4 @@ export class Api<SecurityDataType = unknown> {
 			format: 'json',
 			...params
 		});
-	/**
-	 * @description Get access cookie by magic link
-	 *
-	 * @tags Authenticate
-	 * @name LoginByLink
-	 * @summary Login By Link
-	 * @request POST:/api/auth/login_by_link
-	 */
-	loginByLink = (query: { token: string }, params: RequestParams = {}) =>
-		this.http.request<UserRead, HTTPValidationError>({
-			path: `/api/auth/login_by_link`,
-			method: 'POST',
-			query: query,
-			format: 'json',
-			...params
-		});
-	/**
-	 * @description Send login link to email
-	 *
-	 * @tags Authenticate
-	 * @name SendLoginLink
-	 * @summary Send Login Link
-	 * @request POST:/api/auth/send_login_link
-	 */
-	sendLoginLink = (query: { email: string }, params: RequestParams = {}) =>
-		this.http.request<any, HTTPValidationError>({
-			path: `/api/auth/send_login_link`,
-			method: 'POST',
-			query: query,
-			format: 'json',
-			...params
-		});
 }

@@ -76,6 +76,6 @@
 			placeholder="Passwort eingeben"
 			autocomplete="current-password" />
 
-		<button class="mt-6 btn btn-ghost" type="submit">Mit Passwort anmelden</button>
+		<button class="mt-6 btn btn-ghost" type="submit">Anmelden</button>
 	</Form>
 </article>
