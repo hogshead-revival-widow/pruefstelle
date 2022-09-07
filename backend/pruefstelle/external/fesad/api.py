@@ -1,5 +1,6 @@
 from typing import List, Literal, Optional
 from uuid import UUID
+from pathlib import Path
 
 from pydantic import BaseModel, PositiveInt, ValidationError
 
@@ -23,10 +24,13 @@ class DocumentImporter(Api):
         url_scheme: Literal["http", "https"] = settings.TEXT_IMPORTER.URL_SCHEME,  # type: ignore
     ):
         self.paths = paths
+        verify = settings.get("text_importer.verify", None)  # type: ignore
+        if verify is not None:
+            verify = str(Path.cwd() / "settings" / verify)
         super().__init__(
             base_url=base_url,
             url_scheme=url_scheme,
-            verify=settings.get("text_importer.verify", None),  # type: ignore
+            verify=verify,  # type: ignore
         )
 
     @Api.ErrorHandling.on_response_error

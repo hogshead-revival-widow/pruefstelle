@@ -33,3 +33,5 @@ services:
         depends_on:
             - setup
         restart: always
+        environment:
+            ENV_FOR_PRUEFSTELLE: production # development

@@ -6,12 +6,10 @@ RUN apk add --no-cache libffi-dev
 RUN apk add build-base
 RUN apk add --no-cache supervisor \
     && python -m pip install --upgrade pip \
-    && pip install -r requirements.txt 
+    && pip install -r requirements.txt
 COPY ./ /code/
 RUN pip install -e .
-ENV ENV_FOR_PRUEFSTELLE=production
-EXPOSE 8000
-CMD ["pruefstelle", "run", "--proxy-headers", "--with-populate"]
+CMD ["pruefstelle", "run"]
 
 
 
