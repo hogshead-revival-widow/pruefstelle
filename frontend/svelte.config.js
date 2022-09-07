@@ -3,9 +3,9 @@ import adapter from '@sveltejs/adapter-static';
 
 const config = {
 	kit: {
-		adapter: adapter({ fallback: '200.html' })
+		adapter: adapter({ fallback: '200.html' }),
+		trailingSlash: 'always'
 	},
-
 	preprocess: [
 		preprocess({
 			postcss: true
