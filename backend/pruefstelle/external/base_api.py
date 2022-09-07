@@ -48,17 +48,17 @@ class Api:
                     return method(*args, **kwargs)
                 except requests.exceptions.HTTPError as http_error:
                     """The HTTP request has any error status"""
-                    error = ApiRequestError(http_error)
+                    error = ApiRequestError(http_error)  # type: ignore
                     error.response = http_error.response
                     raise error
                 except requests.exceptions.ConnectionError as connection_error:
                     """There is a network problem (e.g. DNS failure, refused connection)"""
-                    error = ApiRequestError(connection_error)
+                    error = ApiRequestError(connection_error)  # type: ignore
                     error.response = connection_error.response
                     raise error
                 except requests.exceptions.RequestException as request_error:
                     """Any other request related exception has occured"""
-                    error = ApiRequestError(request_error)
+                    error = ApiRequestError(request_error)  # type: ignore
                     error.response = request_error.response
                     raise error
 
@@ -79,7 +79,7 @@ class Api:
                     return method(*args, **kwargs)
                 except ValidationError as validation_error:
                     """The response doesn't conform to the model"""
-                    raise ApiResponseError(validation_error)
+                    raise ApiResponseError(validation_error)  # type: ignore
 
             return handler
 
