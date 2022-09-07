@@ -17,7 +17,7 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 
 ## Docker
 
-1. `cd /minutes/docker/`
+1. `cd /pruefstelle/docker/`
 2. `docker-compose build`
 3. `docker-compose up`
 
