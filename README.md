@@ -15,7 +15,17 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 
 **Vorab**: Repo klonen oder herunterladen
 
-## Frontend
+## Docker
+
+1. `cd /minutes/docker/`
+2. `docker-compose build`
+3. `docker-compose up`
+
+Die genutzte Konfiguration kann in den Konfigurationsdateien (siehe unten) angepasst werden.
+
+## Entwicklung
+
+### Frontend
 
 1. `cd` ins Repo
 2. `cd pruefstelle/frontend/`
@@ -25,7 +35,7 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 
 *Prüfstelle* ist zwar unter http://localhost:3000/ erreichbar, wird aber einen Fehler anzeigen. Schließlich läuft das Backend noch nicht.
 
-## Backend
+### Backend
 
 1. `cd` ins Repo
 2. `cd pruefstelle/backend/settings`
@@ -41,9 +51,9 @@ Die API ist unter http://localhost:8000 (Swagger UI unter: http://localhost:8000
 Und *prüfstelle* wartet nun ohne Fehler unter http://localhost:3000. 
 
 
-# Produktion
+## Produktion
 
-## Frontend
+### Frontend
 
 Statt `npm run dev` (Schritt 6) `npm run build` ausführen.  In `pruefstelle/frontend/build` finden sich nun Javascript-Dateien, die so von beliebigen Webservern statisch ausgeliefert werden können. Mehr Informationen dazu finden sich [hier](https://kit.svelte.dev/docs/adapters#supported-environments-static-sites).
 
