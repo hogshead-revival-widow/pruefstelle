@@ -4,10 +4,10 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 
 # Screenshots
 
-|                                                                                                                                                       |                                                                                                              |                                                                                                                                                         |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------: | --- |
-|                                          ![Fallansicht](/screenshots/Falllansicht.png?raw=true) Fall ansehen                                          | ![Falloptionen](/screenshots/Falloptionen.png?raw=true) Recherchegüte wird abhängig vom Fallprofil berechnet | ![Visualisierung](/screenshots/Visualisierung.png?raw=true 'Protokoll: Visualisierung') Visualisierung der Verteilung aller Bewertungen über einen Fall |
-| ![Hilfstexte](/screenshots/Hilfstexte.png?raw=true) Es wird möglichst wenig vorausgesetzt. Wo etwas vielleicht mal nicht klar ist, gibt's Hilfstexte. |         ![API](/screenshots/API.png?raw=true) Durchgängig modellierte/spezifizierte API (OpenAPI 3)          |                                ![Eingabemaske](/screenshots/Eingabemaske.png?raw=true 'Eingabemaske') Neuen Fall anlegen                                |     |
+| | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|
+|![Fallansicht](/screenshots/Falllansicht.png?raw=true)  Fall ansehen | ![Falloptionen](/screenshots/Falloptionen.png?raw=true) Recherchegüte wird abhängig vom Fallprofil berechnet | ![Visualisierung](/screenshots/Visualisierung.png?raw=true "Protokoll: Visualisierung") Visualisierung der Verteilung aller Bewertungen über einen Fall |
+|![Hilfstexte](/screenshots/Hilfstexte.png?raw=true) Es wird möglichst wenig vorausgesetzt. Wo etwas vielleicht mal nicht klar ist, gibt's Hilfstexte. |  ![API](/screenshots/API.png?raw=true) Durchgängig modellierte/spezifizierte API (OpenAPI 3)  |![Eingabemaske](/screenshots/Eingabemaske.png?raw=true "Eingabemaske") Neuen Fall anlegen | |
 
 # Installation
 
