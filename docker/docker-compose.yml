@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
     setup:
         image: alpine:latest
@@ -30,7 +30,6 @@ services:
             - 8000:8000
         volumes:
             - ./database/database.db:/code/database.db
-            - ./settings/backend:/code/settings
         depends_on:
             - setup
         restart: always
