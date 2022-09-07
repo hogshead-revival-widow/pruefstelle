@@ -37,7 +37,7 @@ _Prüfstelle_ ist zwar unter http://localhost:3000/ erreichbar, wird aber einen 
 
 1. `cd` ins Repo
 2. `cd pruefstelle/backend/settings`
-3. Dort `.secrets.toml` nach dem Beispiel in `examples/example..secrets.toml` anlegen (mindestens die im Beispiel mit "???" markierten Werte müssen angepasst werden)
+3. Dort `.secrets.toml` nach dem Beispiel in `examples/example.secrets.toml` anlegen (mindestens die im Beispiel mit "???" markierten Werte müssen angepasst werden)
 4. `cd pruefstelle/backend`
 5. `python3 -m venv .venv`
 6. `source .venv/bin/activate`
@@ -64,7 +64,7 @@ Je nach Verwendungszweck empfiehlt sich in `.secrets.toml` unter `[production.db
 
 # Orientierung Verzeichnisstruktur & wichtige Dateien
 
-Zu der Konfigurationsdatei vgl. `examples/example..secrets.toml` und den Abschnitt zur Installation oben.
+Zu der Konfigurationsdatei vgl. `examples/example.secrets.toml` und den Abschnitt zur Installation oben.
 
 ## Frontend
 
