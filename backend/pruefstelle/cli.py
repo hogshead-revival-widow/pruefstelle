@@ -26,10 +26,20 @@ def run(
     host: str = settings.server.host,  # type: ignore
     log_level: str = settings.server.log_level,  # type: ignore
     reload: bool = settings.server.reload,  # type: ignore
+    proxy_headers: bool = False,
+    with_populate: bool = False,
 ):  # pragma: no cover
+
+    if with_populate:
+        populate()
     """Start server"""
     uvicorn.run(
-        "pruefstelle.app:app", host=host, port=port, log_level=log_level, reload=reload
+        "pruefstelle.app:app",
+        host=host,
+        port=port,
+        log_level=log_level,
+        reload=reload,
+        proxy_headers=proxy_headers,
     )
 
 
@@ -84,7 +94,7 @@ def create_category(
 
 
 @cli.command()
-def populate(testuser: bool = False):
+def populate(testuser: bool = settings.get("populate.testuser.populate", False)):
     """Populate database"""
     typer.echo("\nStarting\n")
 
