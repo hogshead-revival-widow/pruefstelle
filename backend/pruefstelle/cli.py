@@ -5,6 +5,7 @@ from uuid import UUID
 from typing import Optional
 
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import OperationalError
 from pydantic import parse_obj_as
 import typer
 import uvicorn
@@ -26,11 +27,23 @@ def run(
     host: str = settings.server.host,  # type: ignore
     log_level: str = settings.server.log_level,  # type: ignore
     reload: bool = settings.server.reload,  # type: ignore
-    with_populate=True,
+    populate_if_empty=True,
 ):  # pragma: no cover
 
-    if with_populate:
-        populate()
+    if populate_if_empty:
+        try:
+            session = SessionLocal()
+            case_categories = crud.category.get_categories(
+                session, schemas.CategoryType.CaseCategory
+            )
+            has_been_populated = len(case_categories) > 0
+            if not has_been_populated:
+                # database exists, but hasn't been populated
+                populate()
+        except OperationalError:
+            # database doesn't exist
+            populate()
+
     """Start server"""
     uvicorn.run(
         "pruefstelle.app:app",
