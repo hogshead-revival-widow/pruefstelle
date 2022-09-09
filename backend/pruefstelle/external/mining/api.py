@@ -1,4 +1,4 @@
-from typing import Literal, Union
+from typing import Union
 from uuid import UUID
 
 
@@ -17,25 +17,20 @@ from .schemas import (
 )
 
 
-class Paths(BaseModel):
-    """Paths to endpoints"""
-
-    new: str  # with format variable {workflow}
-    status: str  # with format variable {order_id}
-    result_keywords: str  # with format variable {order_id}
-    result_named_entities: str  # with format variable {order_id}
-    result_linked_entities: str  # with format variable {order_id}
-
-
 class MiningApi(Api):
-    def __init__(
-        self,
-        paths: Paths = settings.MINING_SERVICE.PATHS,
-        base_url: str = settings.MINING_SERVICE.BASE_URL,
-        url_scheme: Literal["http", "https"] = settings.MINING_SERVICE.URL_SCHEME,
-    ):
-        self.paths = paths
-        super().__init__(base_url=base_url, url_scheme=url_scheme)
+    class Paths(BaseModel):
+        """Paths to endpoints"""
+
+        base_url: str = settings.MINING_SERVICE.BASE_URL  # type: ignore
+        new = "/orders/{workflow}"
+        status = "/orders/{order_id}"
+        result_keywords = "/orders/{order_id}/keywords"
+        result_named_entities = "/orders/{order_id}/named-entities"
+        result_linked_entities = "/orders/{order_id}/linked_entities"
+
+    def __init__(self):
+        self.paths = MiningApi.Paths()
+        super().__init__(base_url=self.paths.base_url)
 
     @Api.ErrorHandling.on_response_error
     def new_text_order(

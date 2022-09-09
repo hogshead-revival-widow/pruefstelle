@@ -4,8 +4,6 @@ node_modules
 .svelte-kit/
 /package
 .env
-fixed_categories.json
-fesad_rest.pem
 
 # Secrets
 .secrets.toml

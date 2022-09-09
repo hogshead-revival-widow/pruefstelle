@@ -21,6 +21,7 @@ services:
         volumes:
             - ./settings/nginx/nginx.conf:/etc/nginx/nginx.conf
         restart: always
+        # as the environment variables must be present during build time, you can't specify them here
 
     backend:
         image: backend
@@ -35,3 +36,6 @@ services:
         restart: always
         environment:
             ENV_FOR_PRUEFSTELLE: production # development
+            # override .secrets.toml:server.cors.origins or any other variable
+            # cf. https://www.dynaconf.com/envvars/
+            # PRUEFSTELLE_SERVER__CORS__ORIGNS: http://example

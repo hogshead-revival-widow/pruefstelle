@@ -1,13 +1,15 @@
-# Switching environments: `ENV_FOR_PRUEFSTELLE=production pruefstelle run`
-import os
+import sys
+import warnings
+
 from dynaconf import Dynaconf
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
 
 settings = Dynaconf(
     envvar_prefix="pruefstelle",
     env_switcher="ENV_FOR_PRUEFSTELLE",
-    settings_files=["settings/.secrets.toml"],
+    settings_files=["settings/config.toml", "settings/.secrets.toml"],
     environments=["development", "production"],
     load_dotenv=False,
 )

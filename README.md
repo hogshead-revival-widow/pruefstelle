@@ -4,10 +4,10 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 
 # Screenshots
 
-| | | |
-|:-------------------------:|:-------------------------:|:-------------------------:|
-|![Fallansicht](/screenshots/Falllansicht.png?raw=true)  Fall ansehen | ![Falloptionen](/screenshots/Falloptionen.png?raw=true) Recherchegüte wird abhängig vom Fallprofil berechnet | ![Visualisierung](/screenshots/Visualisierung.png?raw=true "Protokoll: Visualisierung") Visualisierung der Verteilung aller Bewertungen über einen Fall |
-|![Hilfstexte](/screenshots/Hilfstexte.png?raw=true) Es wird möglichst wenig vorausgesetzt. Wo etwas vielleicht mal nicht klar ist, gibt's Hilfstexte. |  ![API](/screenshots/API.png?raw=true) Durchgängig modellierte/spezifizierte API (OpenAPI 3)  |![Eingabemaske](/screenshots/Eingabemaske.png?raw=true "Eingabemaske") Neuen Fall anlegen | |
+|                                                                                                                                                       |                                                                                                              |                                                                                                                                                         |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------: | --- |
+|                                          ![Fallansicht](/screenshots/Falllansicht.png?raw=true) Fall ansehen                                          | ![Falloptionen](/screenshots/Falloptionen.png?raw=true) Recherchegüte wird abhängig vom Fallprofil berechnet | ![Visualisierung](/screenshots/Visualisierung.png?raw=true 'Protokoll: Visualisierung') Visualisierung der Verteilung aller Bewertungen über einen Fall |
+| ![Hilfstexte](/screenshots/Hilfstexte.png?raw=true) Es wird möglichst wenig vorausgesetzt. Wo etwas vielleicht mal nicht klar ist, gibt's Hilfstexte. |         ![API](/screenshots/API.png?raw=true) Durchgängig modellierte/spezifizierte API (OpenAPI 3)          |                                ![Eingabemaske](/screenshots/Eingabemaske.png?raw=true 'Eingabemaske') Neuen Fall anlegen                                |     |
 
 # Installation
 
@@ -19,7 +19,9 @@ Tool (Prototyp) zum Qualitätsmanagement automatischer Erschließung (Textmining
 2. `docker-compose build`
 3. `docker-compose up`
 
-Die genutzte Konfiguration kann in den Konfigurationsdateien (s. u.) angepasst werden.
+Die genutzte Konfiguration kann über `environment` im `docker-compose.yml` angepasst werden.
+Allerdings gilt das nur für das Backend, da die envvars während der Buildzeit des Frontends vorhanden sein müssen.
+Daher ist die .env-Datei aus examples/ in frontend/ erforderlich -- Anpassungen sind dort möglich.
 
 ## Entwicklung
 
@@ -116,7 +118,7 @@ Nutzer:innenaccounts lassen sich über die [`admin/user`-Endpunkte](http://local
 
 ### Standardkategorien anlegen lassen
 
-Ist die [Datei `settings/fixed_categories.json` vorhanden](#weitere-einschränkungen), kann `pruefstelle populate` ausgeführt werden, um Kategorien anzulegen.
+Mit `pruefstelle populate` können die erforderlichen und Standard-Kategorien angelegt werden.
 
 ### Kategorien ändern/anlegen
 
@@ -145,6 +147,5 @@ Viele Hilfstexte helfen dabei, sich automatischen Klassifizieren auch ohne Vorwi
 ## Weitere Einschränkungen
 
 -   Im jetzigen Zustand ist Prüfstelle nur nutzbar, wenn Zugriff auf interne Services besteht; Hinweise auf zu ersetzende Elemente bei Einsatz mit anderen Services geben die Dateien in `backend/settings/`
--   `pruefstelle populate` funktioniert nur, wenn die Datei `settings/fixed_categories.json` vorhanden ist, die ich nicht mit ausliefern kann; zur dort erwarteten Struktur vgl. das dort genutzte Modell.
 -   Die vorhandene Authentifizierung ist dazu gedacht, mehrere Bewertungen durch verschiedene Personen zu ermöglichen und dabei möglichst komfortabel zu sein. Sie ist nicht auf Sicherheit ausgelegt. Es ist keine gute Idee, _Prüfstelle_ ohne weitere Maßnahmen außerhalb eines gesicherten, internen Netzes zu betreiben.
 -   Die Datenbankabfragen sind nicht optimiert.

@@ -1,6 +1,5 @@
-from typing import List, Literal, Optional
+from typing import List, Optional
 from uuid import UUID
-from pathlib import Path
 
 from pydantic import BaseModel, PositiveInt, ValidationError
 
@@ -9,29 +8,16 @@ from ..base_api import Api
 from .schemas import ImportableText, ImportableDocument
 
 
-class Paths(BaseModel):
-    """Paths to endpoints"""
-
-    base_url: str
-    from_du_key: str  # with format variable {du_key}
-
-
 class DocumentImporter(Api):
-    def __init__(
-        self,
-        paths: Paths = settings.TEXT_IMPORTER.PATHS,  # type: ignore
-        base_url: str = settings.TEXT_IMPORTER.BASE_URL,  # type: ignore
-        url_scheme: Literal["http", "https"] = settings.TEXT_IMPORTER.URL_SCHEME,  # type: ignore
-    ):
-        self.paths = paths
-        verify = settings.get("text_importer.verify", None)  # type: ignore
-        if verify is not None:
-            verify = str(Path.cwd() / "settings" / verify)
-        super().__init__(
-            base_url=base_url,
-            url_scheme=url_scheme,
-            verify=verify,  # type: ignore
-        )
+    class Paths(BaseModel):
+        """Paths to endpoints"""
+
+        base_url: str = settings.TEXT_IMPORTER.BASE_URL  # type: ignore
+        from_du_key = "/du/{du_key}/"
+
+    def __init__(self):
+        self.paths = DocumentImporter.Paths()
+        super().__init__(base_url=self.paths.base_url)
 
     @Api.ErrorHandling.on_response_error
     def get_texts(self, identifier: PositiveInt) -> List[ImportableText]:
@@ -66,7 +52,6 @@ class DocumentImporter(Api):
         response = self._get(url)
         data = response.json()["du"]
         texts = []
-
         try:
             if name is None:
                 name = "unbekannt"

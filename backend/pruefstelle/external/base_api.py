@@ -1,4 +1,4 @@
-from typing import Callable, Dict, TypeVar, Optional, Literal
+from typing import Callable, Dict, TypeVar, Optional
 from typing_extensions import ParamSpec
 
 import requests
@@ -12,23 +12,19 @@ ReturnType = TypeVar("ReturnType")
 ParamTypes = ParamSpec("ParamTypes")
 PathsType = TypeVar("PathsType")
 
-Header = Dict[str, str]
-
 
 class Api:
     def __init__(
         self,
-        url_scheme: Literal["http", "https"],
         base_url: str,
-        header: Header = dict(
+        header: Dict[str, str] = dict(
             Content_Type="application/json", Accept="application/json"
         ),
-        verify=None,
     ):
-        self.url_scheme = url_scheme
+        self.url_scheme = "http" if base_url.startswith("http") else "https"
         self.base_url = base_url
         self.header = header
-        self.verify = verify
+        self.verify = False
 
     class ErrorHandling:
         """Hold decorators for Api"""
@@ -46,18 +42,13 @@ class Api:
             ) -> ReturnType:
                 try:
                     return method(*args, **kwargs)
-                except requests.exceptions.HTTPError as http_error:
-                    """The HTTP request has any error status"""
-                    error = ApiRequestError(http_error)  # type: ignore
-                    error.response = http_error.response
-                    raise error
-                except requests.exceptions.ConnectionError as connection_error:
-                    """There is a network problem (e.g. DNS failure, refused connection)"""
-                    error = ApiRequestError(connection_error)  # type: ignore
-                    error.response = connection_error.response
-                    raise error
-                except requests.exceptions.RequestException as request_error:
-                    """Any other request related exception has occured"""
+                except (
+                    requests.exceptions.HTTPError,
+                    requests.exceptions.ConnectionError,
+                    requests.exceptions.RequestException,
+                ) as request_error:
+                    """The HTTP request erroed out / there was a network problem
+                    or any other request related exception has occured"""
                     error = ApiRequestError(request_error)  # type: ignore
                     error.response = request_error.response
                     raise error
