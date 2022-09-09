@@ -32,5 +32,6 @@ services:
         environment:
             ENV_FOR_PRUEFSTELLE: production # development
             # override .secrets.toml:server.cors.origins or any other variable
+            # (must be prefixed with `PRUEFSTELLE`)
             # cf. https://www.dynaconf.com/envvars/
-            # pruefstelle_server__cors__origins: http://localhost:3000
+            PRUEFSTELLE_server__cors_origins: http://localhost:3000
