@@ -30,11 +30,11 @@ def read(*paths, **kwargs):
 
 
 app = FastAPI(
-    title=settings.about.title,
+    title=settings.about.title,  # type: ignore
     version=read("VERSION"),
-    contact=settings.about.contact,
+    contact=settings.about.contact,  # type: ignore
     redoc_url=None,
-    swagger_ui_parameters=settings.about.swagger_ui_parameters,
+    swagger_ui_parameters=settings.about.swagger_ui_parameters,  # type: ignore
 )
 
 
