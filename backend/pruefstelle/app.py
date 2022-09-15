@@ -62,7 +62,7 @@ def start_update_status():
             sleep(seconds)
             update_status()
 
-    repeat_every_seconds = 60
+    repeat_every_seconds = 30
     daemon = Thread(
         target=background_task,
         args=(repeat_every_seconds,),
