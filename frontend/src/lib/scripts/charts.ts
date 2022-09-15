@@ -1,4 +1,4 @@
-import { ps, isKeyword, type ItemInformation, ResultType } from '$lib/api';
+import { ps, isKeyword, isEntity, isTopic, type ItemInformation, ResultType } from '$lib/api';
 import { NAMED_ENTITY_TO_WORD } from '$lib/data/namedEntities';
 
 interface ChartItem extends ItemInformation {
@@ -24,14 +24,28 @@ const itemToChartInformation = (item: ps.AnyResult): ChartItem => {
 			bad: bad
 		};
 	}
-	return {
-		id: item.id,
-		name: `${NAMED_ENTITY_TO_WORD[item.type]}: ` + item.label,
-		discriminator: ResultType.NamedEntity,
-		type: item.type,
-		good: good,
-		bad: bad
-	};
+
+	if (isEntity(item)) {
+		return {
+			id: item.id,
+			name: `${NAMED_ENTITY_TO_WORD[item.type]}: ` + item.label,
+			discriminator: ResultType.NamedEntity,
+			type: item.type,
+			good: good,
+			bad: bad
+		};
+	}
+
+	if (isTopic(item)) {
+		return {
+			id: item.id,
+			name: item.keywords.map((keyword) => keyword.keyword).join(' - '),
+			discriminator: ResultType.Topic,
+			type: undefined,
+			good: good,
+			bad: bad
+		};
+	}
 };
 const itemsToDataset = (items: ps.AnyResult[]): Dataset => {
 	const infos: ChartItem[] = items
@@ -40,8 +54,10 @@ const itemsToDataset = (items: ps.AnyResult[]): Dataset => {
 
 	const good = infos
 		.filter((info) => info.good > 0)
-		.map((info) => ({ x: info.name, y: info.good }));
-	const bad = infos.filter((info) => info.bad > 0).map((info) => ({ x: info.name, y: info.bad }));
+		.map((info) => ({ x: `${info.name} ######${info.id}`, y: info.good }));
+	const bad = infos
+		.filter((info) => info.bad > 0)
+		.map((info) => ({ x: `${info.name} ######${info.id}`, y: info.bad }));
 	return { good, bad };
 };
 
@@ -62,7 +78,7 @@ export const getCharts = (readReports: ps.ReportWithPoints[] | undefined) => {
 		charts.push(keywordData);
 	}
 
-	const namedEntites = allItems.filter((item) => !isKeyword(item));
+	const namedEntites = allItems.filter((item) => isEntity(item));
 
 	if (namedEntites.length > 0) {
 		const namedEntityData: DatasetWithMeta = {
@@ -71,6 +87,17 @@ export const getCharts = (readReports: ps.ReportWithPoints[] | undefined) => {
 			titleClasses: ['named-entity']
 		};
 		charts.push(namedEntityData);
+	}
+
+	const topics = allItems.filter((item) => isTopic(item));
+
+	if (topics.length > 0) {
+		const topicData: DatasetWithMeta = {
+			title: 'Topics',
+			dataset: itemsToDataset(topics),
+			titleClasses: ['topic']
+		};
+		charts.push(topicData);
 	}
 
 	return charts;

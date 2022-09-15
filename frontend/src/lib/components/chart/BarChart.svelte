@@ -45,6 +45,25 @@
 				labels: {
 					color: color
 				}
+			},
+
+			tooltip: {
+				callbacks: {
+					label: (context) => {
+						let label = context.label;
+						const splitter = '######';
+						if (label && label.includes(splitter)) label = label.split(splitter)[0];
+						label = label.length > 39 ? label.slice(0, 36) + '...' : label;
+						return label;
+					},
+					title: (context) => {
+						let label = context[0].label;
+						const splitter = '######';
+						if (label && label.includes(splitter)) label = label.split(splitter)[0];
+						label = label.length > 39 ? label.slice(0, 36) + '...' : label;
+						return label;
+					}
+				}
 			}
 		},
 
