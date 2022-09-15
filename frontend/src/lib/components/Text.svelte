@@ -77,15 +77,23 @@
 		</p>
 
 		{#if readText.mining_results.length > 0}
-			<div class="prose mt-2 w-96 italic" in:fade|local>
-				<h4 class="not-italic">Mining-Ergebnisse</h4>
+			<div class="mt-2 w-96 italic" in:fade|local>
+				<div class="prose">
+					<h4 class=" not-italic">Mining-Ergebnisse</h4>
+				</div>
 				{#each readText.mining_results as result}
-					{#if isKeyword(result)}
-						<span class="m-1 keyword" id="result-{result.id}">{result.keyword}</span>
-					{:else if isEntity(result)}
-						<span class="m-1 named-entity {result.type}" id="result-{result.id}"
-							>{result.label}</span>
-					{/if}
+					<span
+						class="m-1 {isKeyword(result)
+							? 'keyword'
+							: isEntity(result)
+							? `named-entity ${result.type}`
+							: 'topic'}"
+						id="result-{result.id}"
+						>{isKeyword(result)
+							? result.keyword
+							: isEntity(result)
+							? result.label
+							: result.keywords.map((keyword) => keyword.keyword).join('-')}</span>
 				{/each}
 			</div>
 		{/if}

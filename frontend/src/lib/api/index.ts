@@ -1,12 +1,23 @@
 import * as ps from './contracts';
 import { makePruefstelle, Pruefstelle } from './client';
-import { isKeyword, isText, isCase, isDocument } from './utils';
+import { isKeyword, isEntity, isTopic, isText, isCase, isDocument } from './utils';
 
-export { ps, makePruefstelle, Pruefstelle, isKeyword, isText, isCase, isDocument };
+export {
+	ps,
+	makePruefstelle,
+	Pruefstelle,
+	isKeyword,
+	isEntity,
+	isText,
+	isTopic,
+	isCase,
+	isDocument
+};
 
 export enum ResultType {
 	Keyword = 'result_keyword',
-	NamedEntity = 'result_named_entity'
+	NamedEntity = 'result_named_entity',
+	Topic = 'topic'
 }
 
 export const EvaluationType = ps.EvaluationType;
@@ -26,6 +37,6 @@ export type CategoriesByType = Record<RelevantCategory, ps.CategoryRead[]>;
 export interface ItemInformation {
 	id: string;
 	name: string;
-	discriminator: ResultType.Keyword | ResultType.NamedEntity;
+	discriminator: ResultType.Keyword | ResultType.NamedEntity | ResultType.Topic;
 	type: undefined | ps.NamedEntityType;
 }

@@ -4,7 +4,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, AnyHttpUrl
 
-from ...schemas.result import KeywordBase, NamedEntityBase
+from ...schemas.result import KeywordBase, NamedEntityBase, TopicBase
 from ...schemas.mixins import Content
 
 
@@ -22,6 +22,7 @@ class TextWorkflow(str, enum.Enum):
     KEYWORD_EXTRACTION = "keyword-extraction"
     NAMED_ENTITY_RECOGNITION = "named-entity-recognition"
     # NAMED_ENTITY_LINKING = "named-entity-linking"
+    TOPIC = "topic-modeling"
 
     @classmethod
     def to_list(cls) -> List[str]:
@@ -100,3 +101,12 @@ class ResultNamedEntities(ResultBase):
 
     def get_items(self):
         return self.named_entities
+
+
+class ResultTopics(ResultBase):
+    """Mined entities"""
+
+    topics: List[TopicBase]
+
+    def get_items(self):
+        return self.topics

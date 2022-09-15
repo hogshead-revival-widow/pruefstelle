@@ -2,7 +2,7 @@ import { get as $ } from 'svelte/store';
 
 import { user } from '$lib/stores';
 
-import { ps, ResultType, isKeyword, EvaluationType } from '$lib/api';
+import { ps, ResultType, isKeyword, isEntity, EvaluationType } from '$lib/api';
 import { getShortIfNeeded } from '$lib/utils';
 import { NAMED_ENTITY_TO_WORD_WITH_ARTICLE } from '$lib/data/namedEntities';
 
@@ -21,7 +21,11 @@ export class EvaluationItem {
 	readonly title: TitleData;
 	readonly case_id: string;
 
-	constructor(item: ps.KeywordRead | ps.NamedEntityRead, titles: TitleData[], case_id = '') {
+	constructor(
+		item: ps.KeywordRead | ps.NamedEntityRead | ps.TopicRead,
+		titles: TitleData[],
+		case_id = ''
+	) {
 		this.id = item.id;
 		this.user_id = $(user).id;
 		this.showMore = false;
@@ -33,10 +37,14 @@ export class EvaluationItem {
 			this.name = item.keyword;
 			this.type = undefined;
 			this.discriminator = ResultType.Keyword;
-		} else {
+		} else if (isEntity(item)) {
 			this.name = item.label;
 			this.type = item.type;
 			this.discriminator = ResultType.NamedEntity;
+		} else {
+			this.name = item.keywords.map((keyword) => keyword.keyword).join('-');
+			this.type = undefined;
+			this.discriminator = ResultType.Topic;
 		}
 	}
 
@@ -44,8 +52,16 @@ export class EvaluationItem {
 		return this.discriminator === ResultType.Keyword;
 	}
 
+	isEntity() {
+		return this.discriminator === ResultType.NamedEntity;
+	}
+
+	isTopic() {
+		return this.discriminator === ResultType.Topic;
+	}
+
 	getEvaluationType() {
-		return this.isKeyword()
+		return this.isKeyword() || this.isTopic()
 			? EvaluationType.ScoredEvaluation
 			: EvaluationType.CorrectnessEvaluation;
 	}
@@ -57,7 +73,13 @@ export class EvaluationItem {
 	getClasses() {
 		const keywordClasses = ['keyword'];
 		const namedEntityClasses = ['named-entity', this.type];
-		const classes = this.isKeyword() ? keywordClasses : namedEntityClasses;
+		const topicClasses = ['topic', this.type];
+
+		const classes = this.isKeyword()
+			? keywordClasses
+			: this.isEntity()
+			? namedEntityClasses
+			: topicClasses;
 		return classes.join(' ');
 	}
 

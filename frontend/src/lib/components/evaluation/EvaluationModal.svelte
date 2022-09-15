@@ -11,6 +11,7 @@
 	import { user } from '$lib/stores';
 	import { EvaluationType, NamedEntityType } from '$lib/api';
 	import type { RefreshState } from '$lib/scripts/reloader';
+	import { object_without_properties } from 'svelte/internal';
 
 	export let readReports: ps.ReportWithPoints[];
 	export let batchMode = undefined;
@@ -48,7 +49,8 @@
 		[NamedEntityType.PERSON]: { selected: [], lengthBefore: 0 },
 		[NamedEntityType.LOCATION]: { selected: [], lengthBefore: 0 },
 		[NamedEntityType.ORGANIZATION]: { selected: [], lengthBefore: 0 },
-		keyword: { selected: [], lengthBefore: undefined }
+		keyword: { selected: [], lengthBefore: undefined },
+		topic: { selected: [], lengthBefore: undefined }
 	};
 
 	const skip = (toSkip: EvaluationItem) => {
@@ -56,7 +58,7 @@
 		evaluationQueue = [...evaluationQueue.filter((item) => item.id !== toSkip.id), toSkip];
 	};
 
-	const selectItems = (key: ps.NamedEntityType | 'keyword') => {
+	const selectItems = (key: ps.NamedEntityType | 'keyword' | 'topic') => {
 		const currentSelection = Array.from(selector.getSelection());
 		if (
 			hasFilteredBefore[key].selected.length > 0 &&
@@ -73,6 +75,8 @@
 		let selected = [];
 		if (key === 'keyword') {
 			selected = evaluationQueue.filter((item) => item.isKeyword()).map((item) => item.id);
+		} else if (key === 'topic') {
+			selected = evaluationQueue.filter((item) => item.isTopic()).map((item) => item.id);
 		} else {
 			selected = evaluationQueue
 				.filter((item) => !item.isKeyword() && item.type === key)
@@ -136,6 +140,11 @@
 		{#if batchMode == true}
 			<Card isHideable={false} classes={['w-100', 'mt-4', 'mb-4']}>
 				<div class="btn-group  mb-2 place-content-end">
+					{#if evaluationQueue.filter((item) => item.isTopic()).length > 0}
+						<button class="btn-ghost btn btn-xs gap-2" on:click={() => selectItems('topic')}
+							><span class="topic" /></button>
+					{/if}
+
 					{#if evaluationQueue.filter((item) => item.isKeyword()).length > 0}
 						<button class="btn-ghost btn btn-xs gap-2" on:click={() => selectItems('keyword')}
 							><span class="keyword" /></button>
@@ -172,7 +181,9 @@
 					{#if selected !== undefined && $selected.size > 0}
 						{#if evaluationQueue
 							.filter((toEvaluate) => $selected.has(toEvaluate.id))
-							.every((toEvaluate) => toEvaluate.isKeyword())}
+							.every((toEvaluate) => toEvaluate.isKeyword()) || evaluationQueue
+								.filter((toEvaluate) => $selected.has(toEvaluate.id))
+								.every((toEvaluate) => toEvaluate.isTopic())}
 							<div class="btn-group">
 								<button
 									class="btn btn-sm evaluation-good"
@@ -274,7 +285,7 @@
 									id="my-batch-evaluation-{item.id}" />
 							</td>
 							<td>
-								<mark class="{item.getClasses()}  badge-lg">
+								<mark class="{item.getClasses()}  badge-lg" title={item.name}>
 									{item.name}
 								</mark>
 							</td>
@@ -286,10 +297,7 @@
 		{:else if batchMode === false}
 			<article class="stack">
 				{#each evaluationQueue as toEvaluate, i (toEvaluate.id)}
-					<div
-						out:fly|local
-						class="card mb-2 bg-base-100 {i == 0 ? 'shadow-lg' : 'shadow'} w-98"
-						class:h-64={!toEvaluate.showMore}>
+					<div out:fly|local class="card mb-2 bg-base-100 {i == 0 ? 'shadow-lg' : 'shadow'} w-98">
 						<div class="card-body">
 							<div class="btn-group place-content-end mb-0">
 								<button
@@ -312,26 +320,32 @@
 								</button>
 							</div>
 							<h2 class="card-title mb-2 mt-2">
-								Bewertung: <span class={toEvaluate.getClasses()}> {toEvaluate.name}</span>
+								Bewertung:
+								{#if toEvaluate.isTopic()}Topic{:else}
+									<span class={toEvaluate.getClasses()}> {toEvaluate.name}</span>
+								{/if}
 							</h2>
 
-							{#if toEvaluate.getEvaluationType() === EvaluationType.CorrectnessEvaluation}
-								<p>
-									Ist
-									<mark class={toEvaluate.getClasses()}>
+							<div class="evaluation">
+								{#if toEvaluate.getEvaluationType() === EvaluationType.CorrectnessEvaluation}
+									<p>Ist</p>
+									<p class={toEvaluate.getClasses()}>
 										{toEvaluate.name}
-									</mark>
-									{toEvaluate.getTypeName()} dieses Namens?
-								</p>
-							{:else}
-								<p>
-									Wie gut beschreibt das Schlüsselwort <mark class={toEvaluate.getClasses()}>
-										{toEvaluate.name}
-									</mark>
-									das Dokument <strong>{@html toEvaluate.getDocumentLink(false)}?</strong>
-								</p>
-							{/if}
+									</p>
+									<p>{toEvaluate.getTypeName()} dieses Namens?</p>
+								{:else}
+									<p>
+										Wie gut beschreibt {toEvaluate.isKeyword() ? 'das Schlüsselwort' : 'das Topic'}
+									</p>
 
+									<p class={toEvaluate.getClasses()}>
+										{toEvaluate.name}
+									</p>
+
+									<p>das Dokument</p>
+									<p><strong>{@html toEvaluate.getDocumentLink(false)}?</strong></p>
+								{/if}
+							</div>
 							<form method="post" name={toEvaluate.id}>
 								<div class="card-actions justify-end mt-2">
 									<div class="btn-group">
@@ -378,6 +392,19 @@
 							{#if toEvaluate.showMore}
 								<div class="prose">
 									<div class="divider" />
+									{#if toEvaluate.isTopic()}
+										<h3>Topic-Mappings</h3>
+										<ul>
+											{#each readReports
+												.flatMap((report) => report.item_results)
+												.find((topic) => topic.id === toEvaluate.id)
+												.mappings.sort((that, other) => other.score - that.score) as mapping}
+												<li>
+													<a href={mapping.link} target="new">{mapping.terms} ({mapping.score})</a>
+												</li>
+											{/each}
+										</ul>
+									{/if}
 									<h3>Bezugsdokument</h3>
 									<Category
 										compactView={true}

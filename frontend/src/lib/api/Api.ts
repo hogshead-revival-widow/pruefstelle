@@ -15,6 +15,16 @@
   18: all imports from "./contracts" must be imported with `type` keyword
   51: import `RequestParams` from "./http-client" must be imported with `type` keyword
 */
+/* eslint-disable */
+/* tslint:disable */
+/*
+ * ---------------------------------------------------------------
+ * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
+ * ##                                                           ##
+ * ## AUTHOR: acacode                                           ##
+ * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
+ * ---------------------------------------------------------------
+ */
 
 import type {
 	BodyCreateTextApiTextPost,
@@ -46,6 +56,7 @@ import type {
 	TextRead,
 	TextUpdate,
 	TextWorkflow,
+	TopicRead,
 	UserRead,
 	UserUpdate
 } from './contracts';
@@ -231,8 +242,8 @@ export class Api<SecurityDataType = unknown> {
 	 * @request DELETE:/api/document/{document_id}
 	 * @secure
 	 */
-	deleteDocumentAndDependingItems = (documentId: string, params: RequestParams = {}) =>
-		this.http.request<CaseRead, HTTPValidationError>({
+	deleteDocument = (documentId: string, params: RequestParams = {}) =>
+		this.http.request<DocumentRead, HTTPValidationError>({
 			path: `/api/document/${documentId}`,
 			method: 'DELETE',
 			secure: true,
@@ -259,7 +270,7 @@ export class Api<SecurityDataType = unknown> {
 			...params
 		});
 	/**
-	 * @description Create a text and a job for every service specified and start the jobs. Note: You need to create a document before adding a text.
+	 * @description Create a text and a job for every service specified and start the jobs. Note: - You need to create a document before adding a text. - You need to trigger the job to start, it is created as a draft
 	 *
 	 * @tags Text
 	 * @name CreateText
@@ -807,7 +818,7 @@ export class Api<SecurityDataType = unknown> {
 	 */
 	createResult = (jobId: string, data: ResultCreate, params: RequestParams = {}) =>
 		this.http.request<
-			KeywordRead | NamedEntityRead | (KeywordRead & NamedEntityRead),
+			TopicRead | KeywordRead | NamedEntityRead | (TopicRead & KeywordRead & NamedEntityRead),
 			HTTPValidationError
 		>({
 			path: `/api/result/${jobId}`,
@@ -829,7 +840,7 @@ export class Api<SecurityDataType = unknown> {
 	 */
 	readResult = (resultId: string, params: RequestParams = {}) =>
 		this.http.request<
-			KeywordRead | NamedEntityRead | (KeywordRead & NamedEntityRead),
+			TopicRead | KeywordRead | NamedEntityRead | (TopicRead & KeywordRead & NamedEntityRead),
 			HTTPValidationError
 		>({
 			path: `/api/result/${resultId}`,
@@ -849,7 +860,7 @@ export class Api<SecurityDataType = unknown> {
 	 */
 	listResultsForItem = (itemId: string, params: RequestParams = {}) =>
 		this.http.request<
-			(KeywordRead | NamedEntityRead | (KeywordRead & NamedEntityRead))[],
+			(TopicRead | KeywordRead | NamedEntityRead | (TopicRead & KeywordRead & NamedEntityRead))[],
 			HTTPValidationError
 		>({
 			path: `/api/result/list/${itemId}`,

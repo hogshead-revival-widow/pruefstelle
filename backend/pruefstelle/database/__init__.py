@@ -25,9 +25,12 @@ from .tables import (
     Item,
     TextCategory,
     ItemType,
+    Topic,
+    TopicKeyword,
+    TopicMapping,
 )
 
-AnyResult = Union[Keyword, NamedEntity]
+AnyResult = Union[Keyword, NamedEntity, Topic]
 
 
 AnyCategory = Union[

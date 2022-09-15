@@ -116,7 +116,9 @@
 }
 
 ._mined_item{
-    @apply badge badge-outline badge-neutral text-secondary
+    @apply badge badge-outline badge-neutral text-secondary;
+    height: fit-content !important;
+
 }
 
 .full_mined_item{
@@ -146,6 +148,25 @@
 .named-entity::before{
     content: '\f02b';
     @apply fas mr-1;
+}
+
+
+
+
+
+
+.topic {
+    @apply _mined_item;
+}
+
+.topic::before {
+    content: '\f277';
+    @apply fas mr-1;
+}
+
+
+.service-topic-modeling {
+    @apply topic;
 }
 
 .service-named-entity-recognition{

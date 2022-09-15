@@ -14,6 +14,11 @@ export const isKeyword = (result: ps.AnyResult): result is ps.KeywordRead => {
 	return false;
 };
 
+export const isTopic = (result: ps.AnyResult): result is ps.TopicRead => {
+	if ((result as ps.TopicRead).given_topic_id) return true;
+	return false;
+};
+
 export const isEntity = (result: ps.AnyResult): result is ps.NamedEntityRead => {
 	if ((result as ps.NamedEntityRead).type) return true;
 	return false;

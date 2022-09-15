@@ -15,11 +15,16 @@
 			toWord: (result: ps.NamedEntityRead) => result.label,
 			additionalClasses: (result: ps.NamedEntityRead) => [result.type],
 			faqTerm: (result: ps.NamedEntityRead) => result.type
+		},
+		[ResultType.Topic]: {
+			toWord: (result: ps.TopicRead) => result.keywords.map((keyword) => keyword.keyword).join('-'),
+			additionalClasses: (result: ps.NamedEntityRead) => [],
+			faqTerm: (_) => 'keyword'
 		}
 	};
 
 	let word = '';
-	let additionalClasses: [string] = [''];
+	let additionalClasses = [''];
 	let faqTerm = '';
 
 	$: {
@@ -33,7 +38,7 @@
 	}
 </script>
 
-<span class="{resultRead.discriminator} {additionalClasses.join(' ')}">
+<span class="{resultRead.discriminator} {additionalClasses.join(' ')}" title={word}>
 	{word}
 </span>
 {#if withFAQ}

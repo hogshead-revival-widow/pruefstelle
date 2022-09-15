@@ -14,6 +14,7 @@ from .schemas import (
     OrderStatus,
     ResultKeywords,
     ResultNamedEntities,
+    ResultTopics,
 )
 
 
@@ -27,6 +28,7 @@ class MiningApi(Api):
         result_keywords = "/orders/{order_id}/keywords"
         result_named_entities = "/orders/{order_id}/named-entities"
         result_linked_entities = "/orders/{order_id}/linked_entities"
+        result_topics = "/orders/{order_id}/topics"
 
     def __init__(self):
         self.paths = MiningApi.Paths()
@@ -78,6 +80,10 @@ class MiningApi(Api):
             TextWorkflow.NAMED_ENTITY_RECOGNITION: {
                 "path": self.paths.result_named_entities,
                 "result": ResultNamedEntities,
+            },
+            TextWorkflow.TOPIC: {
+                "path": self.paths.result_topics,
+                "result": ResultTopics,
             },
             # TextWorkflow.NAMED_ENTITY_LINKING: {
             #    "path": self.paths.result_linked_entities,

@@ -20,6 +20,11 @@ const keyword: Question = {
 		ScoredEvaluation
 };
 
+const TM: Question = {
+	name: 'Was heißt <span class="topic ml-2 mr-2"></span>?',
+	text: '<p>Das steht für <strong>Topic Modeling (TM)</strong>. Dieser Service ordnet einem Text ein oder mehrere Themen (Topics) zu. Ein Thema ist eine Menge aus Schlüsselwörtern. Diese Schlüsselwörter müssen nicht im Eingangstext vorkommen.</p>'
+};
+
 const NER: Question = {
 	name: 'Was heißt <span class="named-entity ml-2 mr-2"></span>?',
 	text: '<p>Das steht für <strong>Named-Entity-Recognition (NER)</strong> oder Eigennamen-Erkennung, die  <span class="named-entity LOCATION">Orte</span>, <span class="named-entity PERSON">Personen</span> und  <span class="named-entity ORGANIZATION">Organisationen</span> aus einem Text ausliest.</p>'
@@ -153,6 +158,7 @@ export const faq: Record<string, Question> = {
 	keyword,
 	'keyword-extraction': KWE,
 	'named-entity-recognition': NER,
+	'topic-modeling': TM,
 	LOCATION,
 	PERSON,
 	ORGANZATION,
@@ -161,6 +167,6 @@ export const faq: Record<string, Question> = {
 	researchQualityContext,
 	services: {
 		name: 'Dienste',
-		text: `<h3>${KWE.name}</h3> ${KWE.text} <h3>${NER.name}</h3> ${NER.text}`
+		text: `<h3>${KWE.name}</h3> ${KWE.text} <h3>${NER.name}</h3> ${NER.text} <h3>${TM.name}</h3> ${TM.text}`
 	}
 };

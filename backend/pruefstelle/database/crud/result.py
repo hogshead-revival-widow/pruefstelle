@@ -21,11 +21,33 @@ def create_result(
     data = result.result.dict(exclude_unset=True)
     ResultModel: database.AnyResult = result.result.discriminator.get_model()
 
-    new_result = ResultModel(**data)  # type: ignore
+    if isinstance(result.result, schemas.TopicCreate):
+        keywords = data.pop("keywords", None)
+        mappings = data.pop("mappings", None)
+        new_result = ResultModel(**data)  # type: ignore
+        if keywords is not None:
+            new_result.keywords.extend(
+                [
+                    database.TopicKeyword(
+                        mining_result_id=new_result.mining_result_id, **keyword
+                    )  # type: ignore
+                    for keyword in keywords
+                ]
+            )
+        if mappings is not None:
+            new_result.mappings.extend(
+                [
+                    database.TopicMapping(
+                        mining_result_id=new_result.mining_result_id, **mapping
+                    )  # type: ignore
+                    for mapping in mappings
+                ]
+            )
+    else:
+        new_result = ResultModel(**data)  # type: ignore
 
     session.add(new_result)
     session.flush()
-
     links = [{"mining_result_id": new_result.id, "mining_job_id": job_id}]
     link_model = ResultModel.mining_job_mining_result_link_model
     establish_link(session, link_model, links)

@@ -15,7 +15,22 @@
   added AnyResult
 */
 
-export type AnyResult = KeywordRead | NamedEntityRead | (KeywordRead & NamedEntityRead);
+export type AnyResult =
+	| KeywordRead
+	| NamedEntityRead
+	| TopicRead
+	| (KeywordRead & NamedEntityRead & TopicRead);
+
+export interface AnyCategory {
+	/** Discriminator */
+	discriminator: 'case_category' | 'document_category' | 'source_category' | 'text_category';
+
+	/** Name */
+	name: string;
+
+	/** Ndb Norm Id */
+	ndb_norm_id?: number;
+}
 
 export interface AnyItemRead {
 	/**
@@ -35,7 +50,12 @@ export interface AnyItemRead {
 	parents: string[];
 
 	/** Mining Results */
-	mining_results: (KeywordRead | NamedEntityRead | (KeywordRead & NamedEntityRead))[];
+	mining_results: (
+		| TopicRead
+		| KeywordRead
+		| NamedEntityRead
+		| (TopicRead & KeywordRead & NamedEntityRead)
+	)[];
 
 	/** Mining Jobs */
 	mining_jobs: JobRead[];
@@ -265,7 +285,7 @@ export interface DocumentRead {
 	external_id_category?: CategoryRead;
 
 	/** Items */
-	items: TextRead[];
+	items: (TextRead | AnyItemRead | (TextRead & AnyItemRead))[];
 
 	/**
 	 * Id
@@ -293,7 +313,7 @@ export interface DocumentReadWithoutCases {
 	external_id_category?: CategoryRead;
 
 	/** Items */
-	items: TextRead[];
+	items: (TextRead | AnyItemRead | (TextRead & AnyItemRead))[];
 
 	/**
 	 * Id
@@ -363,6 +383,23 @@ export interface EvaluationRead {
 export enum EvaluationType {
 	ScoredEvaluation = 'scored_evaluation',
 	CorrectnessEvaluation = 'correctness_evaluation'
+}
+
+export interface ExternalIDCategory {
+	/** Discriminator */
+	discriminator: 'external_id_category';
+
+	/**
+	 * Source Id
+	 * @format uuid
+	 */
+	source_id?: string;
+
+	/** Name */
+	name: string;
+
+	/** Ndb Norm Id */
+	ndb_norm_id?: number;
 }
 
 export interface HTTPValidationError {
@@ -761,7 +798,12 @@ export interface ReportWithPoints {
 	profile_id: string;
 
 	/** Item Results */
-	item_results: (KeywordRead | NamedEntityRead | (KeywordRead & NamedEntityRead))[];
+	item_results: (
+		| TopicRead
+		| KeywordRead
+		| NamedEntityRead
+		| (TopicRead & KeywordRead & NamedEntityRead)
+	)[];
 
 	/**
 	 * Item Results Total
@@ -811,7 +853,11 @@ export interface ReportWithPoints {
 
 export interface ResultCreate {
 	/** Result */
-	result: KeywordCreate | NamedEntityCreate | (KeywordCreate & NamedEntityCreate);
+	result:
+		| KeywordCreate
+		| NamedEntityCreate
+		| TopicCreate
+		| (KeywordCreate & NamedEntityCreate & TopicCreate);
 }
 
 /**
@@ -937,7 +983,12 @@ export interface TextRead {
 	parents: string[];
 
 	/** Mining Results */
-	mining_results: (KeywordRead | NamedEntityRead | (KeywordRead & NamedEntityRead))[];
+	mining_results: (
+		| TopicRead
+		| KeywordRead
+		| NamedEntityRead
+		| (TopicRead & KeywordRead & NamedEntityRead)
+	)[];
 
 	/** Mining Jobs */
 	mining_jobs: JobRead[];
@@ -984,7 +1035,99 @@ export interface TextUpdate {
  */
 export enum TextWorkflow {
 	KeywordExtraction = 'keyword-extraction',
-	NamedEntityRecognition = 'named-entity-recognition'
+	NamedEntityRecognition = 'named-entity-recognition',
+	TopicModeling = 'topic-modeling'
+}
+
+export interface TopicCreate {
+	/**
+	 * Item Id
+	 * @format uuid
+	 */
+	item_id: string;
+
+	/** Id */
+	id: string;
+
+	/** Confidence */
+	confidence: number;
+
+	/** Topic Keywords */
+	topic_keywords: TopicKeywordBase[];
+
+	/** Topic Mappings */
+	topic_mappings: TopicMappingBase[];
+
+	/** Discriminator */
+	discriminator: 'topic';
+}
+
+export interface TopicKeywordBase {
+	/** Keyword */
+	keyword: string;
+
+	/** Confidence */
+	confidence: number;
+}
+
+export interface TopicMappingBase {
+	/** Id */
+	id: string;
+
+	/** Terms */
+	terms: string;
+
+	/** Score */
+	score: number;
+}
+
+export interface TopicMappingRead {
+	/** Link */
+	link: string;
+
+	/** Terms */
+	terms: string;
+
+	/** Score */
+	score: number;
+}
+
+export interface TopicRead {
+	/**
+	 * Id
+	 * @format uuid
+	 */
+	id: string;
+
+	/**
+	 * Date
+	 * @format date-time
+	 */
+	date: string;
+
+	/**
+	 * Item Id
+	 * @format uuid
+	 */
+	item_id: string;
+
+	/** Evaluations */
+	evaluations: EvaluationRead[];
+
+	/** Discriminator */
+	discriminator: 'topic';
+
+	/** Given Topic Id */
+	given_topic_id: string;
+
+	/** Confidence */
+	confidence: number;
+
+	/** Keywords */
+	keywords: TopicKeywordBase[];
+
+	/** Mappings */
+	mappings: TopicMappingRead[];
 }
 
 export interface UserRead {

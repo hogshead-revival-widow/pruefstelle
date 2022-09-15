@@ -35,10 +35,14 @@
 		goto(`/dashboard/case/${newCase.id}`);
 	};
 
+	const initialCategory = readCategories.case_category.find((category) =>
+		category.name.startsWith('Bewegtb')
+	);
+
 	const formProps = {
 		initialValues: {
 			title: '',
-			category_id: undefined
+			category_id: initialCategory?.id
 		},
 		validationSchema: addCaseSchema,
 		onSubmit: (values) => {
@@ -75,7 +79,7 @@
 				class="select select-bordered {$errors.category_id ? 'select-error' : ''}">
 				<option value={undefined}>Auswählen...</option>
 				{#each readCategories.case_category as category}
-					<option value={category.id}>{category.name}</option>
+					<option value={category.id} selected>{category.name}</option>
 				{/each}
 			</Select>
 

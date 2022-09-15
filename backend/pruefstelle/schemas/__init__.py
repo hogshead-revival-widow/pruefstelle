@@ -31,6 +31,8 @@ from .result import (
     KeywordBase,
     KeywordCreate,
     NamedEntityCreate,
+    TopicCreate,
+    TopicBase,
 )
 
 from .report import ReportWithPoints, Report, Level, Constraint

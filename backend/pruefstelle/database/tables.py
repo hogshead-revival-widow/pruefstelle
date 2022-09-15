@@ -317,6 +317,7 @@ class MiningJob(WithTablename, WithID, WithDate, WithCreator):
 class ResultType(str, enum.Enum):
     Keyword = "result_keyword"
     NamedEntity = "result_named_entity"
+    Topic = "topic"
 
     def get_model(self):
         return globals()[self.name]
@@ -386,6 +387,40 @@ class NamedEntity(MiningResult):
         "polymorphic_identity": ResultType.NamedEntity,
         "polymorphic_load": "inline",
     }
+
+
+@mapper_registry.mapped
+class Topic(MiningResult):
+    __tablename__ = "topic"
+
+    mining_result_id = Column(ForeignKey("mining_result.id"), primary_key=True)
+
+    given_topic_id = Column(String(50), nullable=False)
+    confidence = Column(DECIMAL(10, 2), nullable=False)
+    keywords = relationship("TopicKeyword")
+    mappings = relationship("TopicMapping")
+
+    __mapper_args__ = {
+        "polymorphic_identity": ResultType.Topic,
+        "polymorphic_load": "inline",
+    }
+
+
+@mapper_registry.mapped
+class TopicKeyword(WithID):
+    __tablename__ = "topic_keyword"
+    mining_result_id = Column(ForeignKey("topic.mining_result_id"))
+    keyword = Column(String, nullable=False)
+    confidence = Column(DECIMAL(10, 2), nullable=False)
+
+
+@mapper_registry.mapped
+class TopicMapping(WithID):
+    __tablename__ = "topic_mapping"
+    mining_result_id = Column(ForeignKey("topic.mining_result_id"))
+    terms = Column(String, nullable=False)
+    score = Column(DECIMAL(10, 2), nullable=False)
+    link = Column(String, nullable=False)
 
 
 """

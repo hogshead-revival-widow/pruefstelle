@@ -1,7 +1,7 @@
 from uuid import UUID
 from typing import List, Annotated, Union, Literal, Set
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 
 from .category import CategoryRead
 from .mixins import WithDate, Content, WithTitle
