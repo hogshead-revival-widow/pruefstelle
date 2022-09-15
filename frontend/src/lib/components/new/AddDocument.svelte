@@ -40,7 +40,7 @@
 	};
 
 	const handleDelete = async () => {
-		const deletedDocument = await Pruefstelle.deleteDocumentAndDependingItems(editDocument.id);
+		const deletedDocument = await Pruefstelle.deleteDocument(editDocument.id);
 		drafts = drafts.filter((draftDocument) => draftDocument.id !== editDocument.id);
 	};
 
