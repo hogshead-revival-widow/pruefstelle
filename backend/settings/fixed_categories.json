@@ -1,210 +1,210 @@
 {
-    "case_category":
-        [
-            {
-                "name": "Gemischt"
-            },
-            {
-                "name": "Bewegtbild"
-            },
-            {
-                "name": "Wort"
-            },
-            {
-                "name": "Text"
-            },
-            {
-                "name": "Netz"
-            },
-            {
-                "name": "Sonstiges"
-            }
-        ],
-    "document_category":
-
-        [
-            {
-                "name": "Biographie",
-                "ndb_norm_id": 13430,
-                "fesad_code": 903
-            },
-            {
-                "name": "Bildende Kunst",
-                "ndb_norm_id": 1357,
-                "fesad_code": 12172
-            },
-            {
-                "name": "Erziehung und Bildung",
-                "ndb_norm_id": 1358,
-                "fesad_code": 102
-            },
-            {
-                "name": "Freizeit",
-                "ndb_norm_id": 9686,
-                "fesad_code": 104
-            },
-            {
-                "name": "Geschichte",
-                "ndb_norm_id": 1359,
-                "fesad_code": 914
-            },
-            {
-                "name": "Gesundheit",
-                "ndb_norm_id": 1361,
-                "fesad_code": 112
-            },
-            {
-                "name": "Gesellschaft und Soziales",
-                "ndb_norm_id": 1360,
-                "fesad_code": 105
-            },
-            {
-                "name": "Kultur",
-                "ndb_norm_id": 1363,
-                "fesad_code": 107
-            },
-            {
-                "name": "Katastrophe",
-                "ndb_norm_id": 2822,
-                "fesad_code": 943
-            },
-            {
-                "name": "Lokales",
-                "ndb_norm_id": 13429,
-                "fesad_code": 111
-            },
-            {
-                "name": "Medien",
-                "ndb_norm_id": 1365,
-                "fesad_code": 106
-            },
-            {
-                "name": "Natur",
-                "ndb_norm_id": 1367,
-                "fesad_code": 971
-            },
-            {
-                "name": "Politik",
-                "ndb_norm_id": 9684,
-                "fesad_code": 114
-            },
-            {
-                "name": "Querschnitt",
-                "ndb_norm_id": 13426,
-                "fesad_code": 115
-            },
-            {
-                "name": "Recht",
-                "ndb_norm_id": 1369,
-                "fesad_code": 116
-            },
-            {
-                "name": "Religion",
-                "ndb_norm_id": 1370,
-                "fesad_code": 118
-            },
-            {
-                "name": "Regionales",
-                "ndb_norm_id": 13428,
-                "fesad_code": 117
-            },
-            {
-                "name": "Sport",
-                "ndb_norm_id": 1371,
-                "fesad_code": 119
-            },
-            {
-                "name": "Überregionales",
-                "ndb_norm_id": 13427,
-                "fesad_code": 122
-            },
-            {
-                "name": "Technik",
-                "ndb_norm_id": 1372,
-                "fesad_code": 121
-            },
-            {
-                "name": "Umwelt",
-                "ndb_norm_id": 1373,
-                "fesad_code": 123
-            },
-            {
-                "name": "Verkehr",
-                "ndb_norm_id": 1375,
-                "fesad_code": 125
-            },
-            {
-                "name": "Wissenschaft",
-                "ndb_norm_id": 1377,
-                "fesad_code": 127
-            },
-            {
-                "name": "Wirtschaft",
-                "ndb_norm_id": 1376,
-                "fesad_code": 126
-            },
-            {
-                "name": "Sonstiges"
-            }
-        ],
-    "text_category":
-        [
-            {
-                "name": "Sprecher:innentext"
-            },
-            {
-                "name": "Pressetext"
-            },
-            {
-                "name": "Internettext"
-            },
-            {
-                "name": "Moderationstext"
-            },
-            {
-                "name": "Manuskript"
-            },
-            {
-                "name": "Transkript"
-            },
-            {
-                "name": "Sonstiges"
-            }
-        ],
-        "source_category":
-        [
-            {
+    "case_category": [
+        {
+            "name": "Gemischt"
+        },
+        {
+            "name": "Bewegtbild"
+        },
+        {
+            "name": "Wort"
+        },
+        {
+            "name": "Text"
+        },
+        {
+            "name": "Netz"
+        },
+        {
+            "name": "Sonstiges"
+        }
+    ],
+    "document_category": [
+        {
+            "name": "Biographie",
+            "ndb_norm_id": 13430,
+            "fesad_code": 903
+        },
+        {
+            "name": "Bildende Kunst",
+            "ndb_norm_id": 1357,
+            "fesad_code": 12172
+        },
+        {
+            "name": "Erziehung und Bildung",
+            "ndb_norm_id": 1358,
+            "fesad_code": 102
+        },
+        {
+            "name": "Freizeit",
+            "ndb_norm_id": 9686,
+            "fesad_code": 104
+        },
+        {
+            "name": "Geschichte",
+            "ndb_norm_id": 1359,
+            "fesad_code": 914
+        },
+        {
+            "name": "Gesundheit",
+            "ndb_norm_id": 1361,
+            "fesad_code": 112
+        },
+        {
+            "name": "Gesellschaft und Soziales",
+            "ndb_norm_id": 1360,
+            "fesad_code": 105
+        },
+        {
+            "name": "Kultur",
+            "ndb_norm_id": 1363,
+            "fesad_code": 107
+        },
+        {
+            "name": "Katastrophe",
+            "ndb_norm_id": 2822,
+            "fesad_code": 943
+        },
+        {
+            "name": "Lokales",
+            "ndb_norm_id": 13429,
+            "fesad_code": 111
+        },
+        {
+            "name": "Medien",
+            "ndb_norm_id": 1365,
+            "fesad_code": 106
+        },
+        {
+            "name": "Natur",
+            "ndb_norm_id": 1367,
+            "fesad_code": 971
+        },
+        {
+            "name": "Politik",
+            "ndb_norm_id": 9684,
+            "fesad_code": 114
+        },
+        {
+            "name": "Querschnitt",
+            "ndb_norm_id": 13426,
+            "fesad_code": 115
+        },
+        {
+            "name": "Recht",
+            "ndb_norm_id": 1369,
+            "fesad_code": 116
+        },
+        {
+            "name": "Religion",
+            "ndb_norm_id": 1370,
+            "fesad_code": 118
+        },
+        {
+            "name": "Regionales",
+            "ndb_norm_id": 13428,
+            "fesad_code": 117
+        },
+        {
+            "name": "Sport",
+            "ndb_norm_id": 1371,
+            "fesad_code": 119
+        },
+        {
+            "name": "Überregionales",
+            "ndb_norm_id": 13427,
+            "fesad_code": 122
+        },
+        {
+            "name": "Technik",
+            "ndb_norm_id": 1372,
+            "fesad_code": 121
+        },
+        {
+            "name": "Umwelt",
+            "ndb_norm_id": 1373,
+            "fesad_code": 123
+        },
+        {
+            "name": "Verkehr",
+            "ndb_norm_id": 1375,
+            "fesad_code": 125
+        },
+        {
+            "name": "Wissenschaft",
+            "ndb_norm_id": 1377,
+            "fesad_code": 127
+        },
+        {
+            "name": "Wirtschaft",
+            "ndb_norm_id": 1376,
+            "fesad_code": 126
+        },
+        {
+            "name": "Sonstiges"
+        }
+    ],
+    "text_category": [
+        {
+            "name": "Sachinhalt"
+        },
+        {
+            "name": "O-Ton"
+        },
+        {
+            "name": "Sprecher:innentext"
+        },
+        {
+            "name": "Pressetext"
+        },
+        {
+            "name": "Internettext"
+        },
+        {
+            "name": "Moderationstext"
+        },
+        {
+            "name": "Manuskript"
+        },
+        {
+            "name": "Transkript"
+        },
+        {
+            "name": "Sonstiges"
+        }
+    ],
+    "source_category": [
+        {
+            "name": "FESAD"
+        },
+        {
+            "name": "Youtube"
+        },
+        {
+            "name": "Spotify"
+        },
+        {
+            "name": "Sophora"
+        },
+        {
+            "name": "Mediathek"
+        },
+        {
+            "name": "THEO"
+        },
+        {
+            "name": "Sonstiges"
+        }
+    ],
+    "external_id_category": [
+        {
+            "name": "DU-Key",
+            "source": {
                 "name": "FESAD"
-            },
-            {
-                "name": "Youtube"
-            },
-            {
-                "name": "Spotify"
-            },
-            {
-                "name": "Sophora"
-            },
-            {
-                "name": "Mediathek"
-            },
-            {
-                "name": "THEO"
-            },
-            {
-                "name": "Sonstiges"
             }
-        ],
-    "external_id_category":
-        [
-            {
-                "name": "DU-Key",
-                "source": {
-                    "name": "FESAD"
-                }
-            },
-            {
-                "name": "Sonstiges"
-            }
-        ]
+        },
+        {
+            "name": "Sonstiges"
+        }
+    ]
 }

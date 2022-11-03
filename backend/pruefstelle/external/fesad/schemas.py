@@ -18,6 +18,8 @@ class FESADTextCategory(str, enum.Enum):
     INTERNET = "Internettext"
     MODERATION = "Moderationstext"
     MANUSCRIPT = "Manuskript"
+    WORD = "O-Ton"
+    CONTENT = "Sachinhalt"
 
     @classmethod
     def to_list(cls) -> List[str]:
@@ -38,6 +40,8 @@ class ImportableText(BaseModel):
         if not cls._is_wanted(fesad_type):
             return None
         map_fesad_text_type_to_category = {
+            1: FESADTextCategory.CONTENT,
+            3: FESADTextCategory.WORD,
             6: FESADTextCategory.PR,
             7: FESADTextCategory.MANUSCRIPT,
             8: FESADTextCategory.MODERATION,
@@ -51,7 +55,7 @@ class ImportableText(BaseModel):
 
     @staticmethod
     def _is_wanted(fesad_type: PositiveInt) -> bool:
-        import_these_types = [6, 7, 8, 9, 10]
+        import_these_types = [1, 3, 6, 7, 8, 9, 10]
         return fesad_type in import_these_types
 
     def to_text_create(
