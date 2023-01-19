@@ -13,7 +13,7 @@ class DocumentImporter(Api):
         """Paths to endpoints"""
 
         base_url: str = settings.TEXT_IMPORTER.BASE_URL  # type: ignore
-        from_du_key = "/du/{du_key}/"
+        from_du_key = "/du/{du_key}"
 
     def __init__(self):
         self.paths = DocumentImporter.Paths()
