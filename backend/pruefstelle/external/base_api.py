@@ -104,13 +104,17 @@ class Api:
         self,
         path: str,
         params: Optional[Dict[str, str]] = None,
+        base_url: Optional[str] = None,
     ) -> AnyHttpUrl:
         """Generate URL form `path`, including query parameters (`params`)"""
-        url = self.base_url + path
+        if base_url is None:
+            base_url = self.base_url
+        url = base_url + path
         if params is not None:
             prepared_request = PreparedRequest()
             prepared_request.prepare_url(url, params)
             url = prepared_request.url
             if url is None:
                 raise ApiError("Path -> URL failed while adding params (URL is `None`)")
-        return AnyHttpUrl(url, scheme=self.url_scheme)
+        scheme = "http" if base_url.startswith("http") else "https"
+        return AnyHttpUrl(url, scheme=scheme)

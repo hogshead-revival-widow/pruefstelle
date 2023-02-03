@@ -71,7 +71,7 @@ def get_documents(
     importable_documents = list()
     for document_information in document_informations:
         try:
-            importable_document = importer.get_document(**document_information.dict())
+            importable_document = importer.get_document(info=document_information)
             if importable_document is not None:
                 importable_documents.append(importable_document)
         except ApiError:

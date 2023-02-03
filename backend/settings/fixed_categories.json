@@ -146,6 +146,9 @@
     ],
     "text_category": [
         {
+            "name": "Transkript"
+        },
+        {
             "name": "Sachinhalt"
         },
         {

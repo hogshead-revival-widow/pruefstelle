@@ -1,8 +1,10 @@
-from typing import List, Optional, Dict
 import enum
+from typing import List, Optional, Dict, Any
 from uuid import UUID
 
-from pydantic import BaseModel, PositiveInt, conset
+
+from pydantic import BaseModel, PositiveInt, conset, validator
+
 from ...schemas.mixins import Content, Title
 from ...schemas.document import DocumentCreate
 from ...schemas.text import TextCreate
@@ -10,6 +12,52 @@ from ...schemas.text import TextCreate
 DUKey = PositiveInt
 
 DUKeys = conset(DUKey, min_items=1)
+
+
+class Key(BaseModel):
+    childKey: DUKey
+    parentKey: DUKey
+
+
+class StartTimecode(BaseModel):
+    timecode: int
+
+
+class Container(BaseModel):
+    key: Key
+    startTimecode: StartTimecode
+    durationNum: int
+
+
+class TranscribedWord(BaseModel):
+    name: str
+    time: float
+    duration: float
+
+    @validator("time", "duration")
+    def time_str_to_float(cls, v: Any):
+        return float(v)
+
+
+class Transcript(BaseModel):
+    content: str
+
+
+class TranscriptLimit(BaseModel):
+    start: float  # seconds
+    end: Optional[float]  # seconds
+
+
+class PreviewMiningResultLink(BaseModel):
+    miningMethod: str
+    url: str
+
+
+class Preview(BaseModel):
+    absVideoStartTC: int
+    videoDuration: int
+    absDuStartTc: int
+    miningResultLinks: List[PreviewMiningResultLink]
 
 
 class FESADTextCategory(str, enum.Enum):
@@ -20,6 +68,7 @@ class FESADTextCategory(str, enum.Enum):
     MANUSCRIPT = "Manuskript"
     WORD = "O-Ton"
     CONTENT = "Sachinhalt"
+    TRANSCRIPT = "Transkript"
 
     @classmethod
     def to_list(cls) -> List[str]:
@@ -50,6 +99,19 @@ class ImportableText(BaseModel):
         }
 
         category = map_fesad_text_type_to_category[fesad_type]
+        content = Content(text["content"].strip())
+        return cls(content=content, category=category)
+
+    @classmethod
+    def from_vms(cls, text: Dict[str, str]) -> Optional["ImportableText"]:
+
+        if "content" not in text or "type" not in text:
+            return None
+        vms_type = int(text["type"])
+        map_vms_type_to_category = {
+            -1: FESADTextCategory.TRANSCRIPT,
+        }
+        category = map_vms_type_to_category[vms_type]
         content = Content(text["content"].strip())
         return cls(content=content, category=category)
 

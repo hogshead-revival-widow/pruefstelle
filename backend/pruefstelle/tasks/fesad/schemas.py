@@ -7,4 +7,4 @@ class DocumentInformation(BaseModel):
     du_key: PositiveInt
     name: Optional[str] = None
     category_id: Optional[UUID] = None
-    # todo: subject_area
+    parent_du_key: Optional[PositiveInt] = None

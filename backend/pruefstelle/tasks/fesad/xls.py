@@ -3,8 +3,6 @@ from typing import List, Dict, Any
 from fastapi import UploadFile
 from xlrd import open_workbook
 
-
-from ...config import settings
 from .schemas import DocumentInformation
 
 
@@ -41,6 +39,10 @@ def read_collection(xls: UploadFile) -> List[DocumentInformation]:
             continue
         du_key = int(du_key)
 
+        parent_du_key = item.get("Eltern DU-Key", None)
+        if parent_du_key is not None:
+            parent_du_key = int(parent_du_key)
+
         titles = list()
         # we are only interested in the first two title parts
         for i in range(1, 3):
@@ -58,7 +60,9 @@ def read_collection(xls: UploadFile) -> List[DocumentInformation]:
                 titles.append("unbekannt")
 
         title = ": ".join(titles)
-        document_information = DocumentInformation(du_key=du_key, name=title)
+        document_information = DocumentInformation(
+            du_key=du_key, name=title, parent_du_key=parent_du_key
+        )
         document_informations.append(document_information)
 
     return document_informations
