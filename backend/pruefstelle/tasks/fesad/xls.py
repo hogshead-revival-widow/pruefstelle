@@ -9,7 +9,6 @@ from .schemas import DocumentInformation
 def read_collection(xls: UploadFile) -> List[DocumentInformation]:
     """Get some information about a FESAD document (DU-Key and, if possible, title)  from the xls file exported by FESAD"""
     with xls.file as file:
-        # read to xls file as a list
         # where each item is a dict
         # representing a row, which values can be accessed by
         # column names as keys
@@ -40,8 +39,15 @@ def read_collection(xls: UploadFile) -> List[DocumentInformation]:
         du_key = int(du_key)
 
         parent_du_key = item.get("Eltern DU-Key", None)
+        if str(parent_du_key).strip() == 0:
+            parent_du_key = None
         if parent_du_key is not None:
-            parent_du_key = int(parent_du_key)
+            try:
+                parent_du_key = int(parent_du_key)
+            except ValueError:
+                pass
+            except TypeError:
+                pass
 
         titles = list()
         # we are only interested in the first two title parts
